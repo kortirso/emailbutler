@@ -7,5 +7,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gemspec
 
 group :test do
-  gem 'rspec', '~> 3.0'
+  gem 'database_cleaner', '~> 1.8.0'
+  gem 'rspec-rails', '> 5.0.0'
 end

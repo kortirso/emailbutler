@@ -4,5 +4,7 @@ require 'emailbutler/version'
 require 'emailbutler/engine'
 
 module Emailbutler
-  # Your code goes here...
+  module Mailers
+    autoload :Helpers, 'emailbutler/mailers/helpers'
+  end
 end

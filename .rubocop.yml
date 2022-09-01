@@ -6,6 +6,8 @@ require:
 AllCops:
   Exclude:
     - 'bin/*'
+    - 'db/**/*'
+    - 'spec/dummy/db/**/*'
   NewCops: enable
   TargetRubyVersion: 2.7
 
