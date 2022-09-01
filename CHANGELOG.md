@@ -8,3 +8,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Start project
 - Emailbutler::Message model for saving sent messages
+- Webhooks controller for receiving events
