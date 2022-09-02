@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_01_203215) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_02_175438) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -21,6 +21,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_203215) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "uuid", null: false
+    t.string "mailer", null: false
+    t.string "action", null: false
+    t.jsonb "params", default: {}, null: false
+    t.string "send_to", array: true
   end
 
 end

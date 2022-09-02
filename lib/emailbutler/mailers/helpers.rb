@@ -6,13 +6,29 @@ module Emailbutler
       extend ActiveSupport::Concern
 
       included do
-        before_action :create_emailbutler_message
+        after_action :set_send_to_for_message
       end
 
       private
 
-      def create_emailbutler_message
-        @message = ::Emailbutler::Message.create(status: 'created')
+      def process_action(*args)
+        create_emailbutler_message(args)
+
+        super
+      end
+
+      def create_emailbutler_message(args)
+        @message = ::Emailbutler::Message.new(
+          status: 'created',
+          mailer: self.class.to_s,
+          action: action_name,
+          params: { mailer_params: params, action_params: args[1..] }
+        )
+      end
+
+      def set_send_to_for_message
+        @message.send_to = mail.to
+        @message.save
       end
     end
   end
