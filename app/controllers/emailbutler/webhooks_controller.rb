@@ -5,16 +5,18 @@ module Emailbutler
     skip_before_action :verify_authenticity_token
 
     def create
-      params['_json'].each do |event|
-        next unless event['smtp-id']
-
-        message = ::Emailbutler::Message.find_by(uuid: event['smtp-id'])
-        next unless message
-
-        message.update(status: event['event'])
-      end
+      ::Emailbutler::Webhooks::Receiver.call(
+        user_agent: request.headers['HTTP_USER_AGENT'],
+        payload: receiver_params.to_h
+      )
 
       head :ok
+    end
+
+    private
+
+    def receiver_params
+      params.permit('_json' => %w[smtp-id event])
     end
   end
 end

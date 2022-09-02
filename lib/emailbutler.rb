@@ -7,4 +7,8 @@ module Emailbutler
   module Mailers
     autoload :Helpers, 'emailbutler/mailers/helpers'
   end
+
+  module Webhooks
+    autoload :Receiver, 'emailbutler/webhooks/receiver'
+  end
 end
