@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_02_175438) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_03_182034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -18,13 +18,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_02_175438) do
 
   create_table "emailbutler_messages", force: :cascade do |t|
     t.string "status", default: "", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.uuid "uuid", null: false
     t.string "mailer", null: false
     t.string "action", null: false
     t.jsonb "params", default: {}, null: false
     t.string "send_to", array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["uuid"], name: "index_emailbutler_messages_on_uuid", unique: true
   end
 
 end
