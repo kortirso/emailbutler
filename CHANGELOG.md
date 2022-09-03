@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - saving additional mail params to message
 - Webhooks::Receiver class for checking webhooks payload and updating messages
+- message params serialization with global id support
 
 ## [0.1.0] - 2022-09-01
 ### Added

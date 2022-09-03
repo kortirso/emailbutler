@@ -22,8 +22,16 @@ module Emailbutler
           status: 'created',
           mailer: self.class.to_s,
           action: action_name,
-          params: { mailer_params: params, action_params: args[1..] }
+          params: serialize_params(mailer_params: params, action_params: args[1..])
         )
+      end
+
+      def serialize_params(value)
+        return value.map { |element| serialize_params(element) } if value.is_a?(Array)
+        return value.transform_values { |element| serialize_params(element) } if value.is_a?(Hash)
+        return value.to_global_id.to_s if value.respond_to?(:to_global_id)
+
+        value
       end
 
       def set_send_to_for_message
