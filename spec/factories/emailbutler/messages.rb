@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :emailbutler_message, class: 'Emailbutler::Message' do
+  factory :emailbutler_message, class: Emailbutler.adapter.message_class do
     mailer { 'TestMailer' }
     action { 'send_simple_email' }
     params { {} }

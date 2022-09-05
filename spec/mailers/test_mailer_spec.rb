@@ -2,17 +2,18 @@
 
 describe TestMailer do
   describe '#send_simple_email' do
+    let(:message_class) { Emailbutler.adapter.message_class }
     let!(:message) { create :emailbutler_message }
     let(:mail) { described_class.with(mailer_param: 'mailer param').send_simple_email(message: message) }
 
     it 'creates Message object' do
-      expect { mail.deliver_now }.to change(::Emailbutler::Message, :count).by(1)
+      expect { mail.deliver_now }.to change(message_class, :count).by(1)
     end
 
     it 'Message has parameters', :aggregate_failures do
       mail.deliver_now
 
-      last_message = ::Emailbutler::Message.last
+      last_message = message_class.last
 
       expect(last_message.mailer).to eq 'TestMailer'
       expect(last_message.action).to eq 'send_simple_email'
@@ -31,7 +32,7 @@ describe TestMailer do
       expect(mail.subject).to eq 'Test email'
       expect(mail.to).to eq ['user@gmail.com']
       expect(mail.from).to eq ['dummy@example.com']
-      expect(mail.message_id).to eq ::Emailbutler::Message.last.uuid
+      expect(mail.message_id).to eq message_class.last.uuid
     end
   end
 end

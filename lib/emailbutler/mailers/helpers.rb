@@ -18,7 +18,7 @@ module Emailbutler
       end
 
       def create_emailbutler_message(args)
-        @message = Emailbutler.build(
+        @message = Emailbutler.build_message(
           status: 'created',
           mailer: self.class.to_s,
           action: action_name,
@@ -35,8 +35,8 @@ module Emailbutler
       end
 
       def set_send_to_for_message
-        Emailbutler.set_attribute(@message, :send_to, mail.to)
-        Emailbutler.save(@message)
+        Emailbutler.set_message_attribute(@message, :send_to, mail.to)
+        Emailbutler.save_message(@message)
       end
     end
   end

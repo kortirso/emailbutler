@@ -12,18 +12,28 @@ module Emailbutler
     end
 
     # Public: Build a message.
-    def build(args={})
-      adapter.build(args)
+    def build_message(args={})
+      adapter.build_message(args)
     end
 
     # Public: Sets attribute with value for the message.
-    def set_attribute(*args)
-      adapter.set_attribute(*args)
+    def set_message_attribute(*args)
+      adapter.set_message_attribute(*args)
     end
 
     # Public: Saves the message.
-    def save(*args)
-      adapter.save(*args)
+    def save_message(*args)
+      adapter.save_message(*args)
+    end
+
+    # Public: Finds message by args.
+    def find_message_by(*args)
+      adapter.find_message_by(*args)
+    end
+
+    # Public: Updates the message.
+    def update_message(message, *args)
+      adapter.update_message(message, *args)
     end
   end
 end

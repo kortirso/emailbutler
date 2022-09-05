@@ -46,5 +46,6 @@ module Emailbutler
   end
 
   # Public: All the methods delegated to instance. These should match the interface of Emailbutler::DSL.
-  def_delegators :instance, :build, :set_attribute, :save
+  def_delegators :instance,
+                 :adapter, :build_message, :set_message_attribute, :save_message, :find_message_by, :update_message
 end

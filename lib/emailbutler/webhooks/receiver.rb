@@ -21,10 +21,10 @@ module Emailbutler
         payload['_json'].each do |event|
           next unless event['smtp-id']
 
-          message = ::Emailbutler::Message.find_by(uuid: event['smtp-id'])
+          message = Emailbutler.find_message_by(uuid: event['smtp-id'])
           next unless message
 
-          message.update(status: event['event'])
+          Emailbutler.update_message(message, status: event['event'])
         end
       end
     end

@@ -10,7 +10,6 @@ module Emailbutler
         self.abstract_class = true
       end
 
-      # Private: Do not use outside of this adapter.
       class Emailbutler::Message < Model
         self.table_name = :emailbutler_messages
 
@@ -24,7 +23,7 @@ module Emailbutler
       end
 
       # Public: The name of the adapter.
-      attr_reader :name
+      attr_reader :name, :message_class
 
       # Public: Initialize a new ActiveRecord adapter instance.
       #
@@ -36,18 +35,28 @@ module Emailbutler
       end
 
       # Public: Builds a message.
-      def build(args={})
+      def build_message(args={})
         @message_class.new(args)
       end
 
       # Public: Sets attribute with value for the message.
-      def set_attribute(message, attribute, value)
+      def set_message_attribute(message, attribute, value)
         message[attribute] = value
       end
 
       # Public: Saves the message.
-      def save(message)
+      def save_message(message)
         message.save!
+      end
+
+      # Public: Finds message by args.
+      def find_message_by(args={})
+        @message_class.find_by(args)
+      end
+
+      # Public: Updates the message.
+      def update_message(message, args={})
+        message.update!(args)
       end
     end
   end

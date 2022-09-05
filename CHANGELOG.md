@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - DSL to all the emailbutler goodness
 - active record adapter for DSL
 
+### Modified
+- using emailbutler's DSL everywhere
+
 ## [0.1.0] - 2022-09-01
 ### Added
 - Start project
