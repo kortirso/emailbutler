@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - message params serialization with global id support
 - DSL to all the emailbutler goodness
 - active record adapter for DSL
+- mappers structure with sendgrid example
 
 ### Modified
 - using emailbutler's DSL everywhere

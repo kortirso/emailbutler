@@ -22,18 +22,18 @@ module Emailbutler
     end
 
     # Public: Saves the message.
-    def save_message(*args)
-      adapter.save_message(*args)
+    def save_message(message)
+      adapter.save_message(message)
     end
 
     # Public: Finds message by args.
-    def find_message_by(*args)
-      adapter.find_message_by(*args)
+    def find_message_by(args={})
+      adapter.find_message_by(args)
     end
 
     # Public: Updates the message.
-    def update_message(message, *args)
-      adapter.update_message(message, *args)
+    def update_message(message, args={})
+      adapter.update_message(message, args)
     end
   end
 end

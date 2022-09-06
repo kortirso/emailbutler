@@ -6,18 +6,12 @@ require 'emailbutler/version'
 require 'emailbutler/engine'
 require 'emailbutler/configuration'
 require 'emailbutler/dsl'
+require 'emailbutler/webhooks/receiver'
+require 'emailbutler/mailers/helpers'
 
 module Emailbutler
   extend self
   extend Forwardable
-
-  module Mailers
-    autoload :Helpers, 'emailbutler/mailers/helpers'
-  end
-
-  module Webhooks
-    autoload :Receiver, 'emailbutler/webhooks/receiver'
-  end
 
   # Public: Given an adapter returns a handy DSL to all the emailbutler goodness.
   def new(adapter)
