@@ -31,9 +31,9 @@ module Emailbutler
       adapter.find_message_by(args)
     end
 
-    # Public: Updates the message.
-    def update_message(message, args={})
-      adapter.update_message(message, args)
+    # Public: Creates a message event.
+    def create_message_event(message, args={})
+      adapter.create_message_event(message, args)
     end
   end
 end

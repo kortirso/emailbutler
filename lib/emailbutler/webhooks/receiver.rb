@@ -14,11 +14,9 @@ module Emailbutler
       def call(user_agent:, payload:)
         select_mapper(user_agent)
           .call(payload: payload)
-          .each { |message|
-            Emailbutler.update_message(
-              Emailbutler.find_message_by(uuid: message[:uuid]),
-              status: message[:status]
-            )
+          .each { |event|
+            message = Emailbutler.find_message_by(uuid: event.delete(:message_uuid))
+            Emailbutler.create_message_event(message, event)
           }
       end
 

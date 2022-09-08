@@ -4,7 +4,6 @@ class CreateEmailbutlerTables < ActiveRecord::Migration<%= migration_version %>
     enable_extension 'uuid-ossp' unless extensions.include?('uuid-ossp')
 
     create_table :emailbutler_messages do |t|
-      t.string :status, null: false, default: ''
       t.uuid :uuid, null: false, default: ''
       t.string :mailer, null: false
       t.string :action, null: false
@@ -13,9 +12,17 @@ class CreateEmailbutlerTables < ActiveRecord::Migration<%= migration_version %>
       t.timestamps
     end
     add_index :emailbutler_messages, :uuid, unique: true
+
+    create_table :emailbutler_events do |t|
+      t.integer :emailbutler_message_id, null: false, index: true
+      t.integer :status, null: false
+      t.datetime :timestamp
+      t.timestamps
+    end
   end
 
   def self.down
     drop_table :emailbutler_messages
+    drop_table :emailbutler_events
   end
 end

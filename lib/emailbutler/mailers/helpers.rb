@@ -19,7 +19,6 @@ module Emailbutler
 
       def create_emailbutler_message(args)
         @message = Emailbutler.build_message(
-          status: 'created',
           mailer: self.class.to_s,
           action: action_name,
           params: serialize_params(mailer_params: params, action_params: args[1..])
