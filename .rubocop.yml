@@ -57,3 +57,6 @@ RSpec/ContextWording:
 
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
+
+Gemspec/RequireMFA:
+  Enabled: false
