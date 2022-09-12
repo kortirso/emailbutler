@@ -4,7 +4,7 @@ module Emailbutler
   module Webhooks
     module Mappers
       class Sendgrid
-        STATUS_MAPPER = {
+        DELIVERABILITY_MAPPER = {
           'processed' => 'processed',
           'delivered' => 'delivered',
           'deferred' => 'failed',
@@ -19,7 +19,7 @@ module Emailbutler
         def call(payload:)
           payload['_json'].filter_map { |message|
             message_uuid = message['smtp-id']
-            status = STATUS_MAPPER[message['event']]
+            status = DELIVERABILITY_MAPPER[message['event']]
             next unless message_uuid || status
 
             {

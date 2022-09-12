@@ -6,18 +6,18 @@ module Emailbutler
       extend ActiveSupport::Concern
 
       included do
-        after_action :set_send_to_for_message
+        after_action :save_emailbutler_message
       end
 
       private
 
       def process_action(*args)
-        create_emailbutler_message(args)
+        build_emailbutler_message(args)
 
         super
       end
 
-      def create_emailbutler_message(args)
+      def build_emailbutler_message(args)
         @message = Emailbutler.build_message(
           mailer: self.class.to_s,
           action: action_name,
@@ -33,7 +33,7 @@ module Emailbutler
         value
       end
 
-      def set_send_to_for_message
+      def save_emailbutler_message
         Emailbutler.set_message_attribute(@message, :send_to, mail.to)
         Emailbutler.save_message(@message)
       end
