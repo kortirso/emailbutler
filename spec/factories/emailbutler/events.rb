@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :emailbutler_event, class: Emailbutler.adapter.event_class do
-    status { 'created' }
+    status { 'processed' }
     association :emailbutler_message
   end
 end

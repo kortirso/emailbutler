@@ -13,15 +13,11 @@ module Emailbutler
       class Emailbutler::Message < Model
         self.table_name = :emailbutler_messages
 
-        REJECTED = 'rejected'
-        PROCESSED = 'processed'
-        FAILED = 'failed'
-        DELIVERED = 'delivered'
-
         has_many :emailbutler_events,
                  class_name: 'Emailbutler::Event', dependent: :destroy, foreign_key: :emailbutler_message_id
 
-        enum status: { REJECTED => 0, PROCESSED => 1, FAILED => 2, DELIVERED => 3 }
+        # SMTP provider didn't receive email from your app
+        scope :unsent, -> { where.missing(:emailbutler_events) }
 
         after_initialize :generate_uuid
 
@@ -35,7 +31,17 @@ module Emailbutler
       class Emailbutler::Event < Model
         self.table_name = :emailbutler_events
 
+        REJECTED = 'rejected'
+        PROCESSED = 'processed'
+        FAILED = 'failed'
+        DELIVERED = 'delivered'
+
         belongs_to :emailbutler_message, class_name: 'Emailbutler::Message'
+
+        # Email was undelivered because of some error
+        scope :undelivered, -> { rejected.or(failed) }
+
+        enum status: { REJECTED => 0, PROCESSED => 1, FAILED => 2, DELIVERED => 3 }
       end
 
       # Public: The name of the adapter.
