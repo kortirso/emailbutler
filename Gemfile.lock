@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    emailbutler (0.2.2)
+    emailbutler (0.2.3)
       rails (> 6.0.0)
       sprockets-rails (> 3.4.0)
 
