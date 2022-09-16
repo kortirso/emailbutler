@@ -13,11 +13,13 @@ module Emailbutler
       class Emailbutler::Message < Model
         self.table_name = :emailbutler_messages
 
-        has_many :emailbutler_events,
-                 class_name: 'Emailbutler::Event', dependent: :destroy, foreign_key: :emailbutler_message_id
+        CREATED = 'created'
+        REJECTED = 'rejected'
+        PROCESSED = 'processed'
+        FAILED = 'failed'
+        DELIVERED = 'delivered'
 
-        # SMTP provider didn't receive email from your app
-        scope :unsent, -> { where.missing(:emailbutler_events) }
+        enum status: { CREATED => 0, REJECTED => 1, PROCESSED => 2, FAILED => 3, DELIVERED => 4 }
 
         after_initialize :generate_uuid
 
@@ -28,34 +30,16 @@ module Emailbutler
         end
       end
 
-      class Emailbutler::Event < Model
-        self.table_name = :emailbutler_events
-
-        REJECTED = 'rejected'
-        PROCESSED = 'processed'
-        FAILED = 'failed'
-        DELIVERED = 'delivered'
-
-        belongs_to :emailbutler_message, class_name: 'Emailbutler::Message'
-
-        # Email was undelivered because of some error
-        scope :undelivered, -> { rejected.or(failed) }
-
-        enum status: { REJECTED => 0, PROCESSED => 1, FAILED => 2, DELIVERED => 3 }
-      end
-
       # Public: The name of the adapter.
-      attr_reader :name, :message_class, :event_class
+      attr_reader :name, :message_class
 
       # Public: Initialize a new ActiveRecord adapter instance.
       #
       # name - The Symbol name for this adapter. Optional (default :active_record)
       # message_class - The AR class responsible for the messages table.
-      # event_class - The AR class responsible for the messages events table.
       def initialize(options={})
         @name = options.fetch(:name, :active_record)
         @message_class = options.fetch(:message_class) { Emailbutler::Message }
-        @event_class = options.fetch(:event_class) { Emailbutler::Event }
       end
 
       # Public: Builds a message.
@@ -78,9 +62,11 @@ module Emailbutler
         @message_class.find_by(args)
       end
 
-      # Public: Creates a message event.
-      def create_message_event(message, args={})
-        @event_class.create(args.merge(emailbutler_message_id: message.id))
+      # Public: Updates the message.
+      def update_message(message, args={})
+        message.update(args) if message.timestamp.nil? || args[:timestamp] > message.timestamp
+      rescue ::ActiveRecord::StaleObjectError
+        update_message(message.reload, args)
       end
     end
   end

@@ -16,7 +16,7 @@ module Emailbutler
           .call(payload: payload)
           .each { |event|
             message = Emailbutler.find_message_by(uuid: event.delete(:message_uuid))
-            Emailbutler.create_message_event(message, event)
+            Emailbutler.update_message(message, event)
           }
       end
 

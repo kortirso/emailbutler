@@ -6,5 +6,6 @@ FactoryBot.define do
     action { 'send_simple_email' }
     params { {} }
     send_to { ['user@gmail.com'] }
+    status { 'processed' }
   end
 end

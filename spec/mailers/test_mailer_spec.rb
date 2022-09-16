@@ -24,6 +24,7 @@ describe TestMailer do
         )
       )
       expect(last_message.send_to).to eq ['user@gmail.com']
+      expect(last_message.status).to eq 'created'
     end
 
     it 'renders the headers', :aggregate_failures do
