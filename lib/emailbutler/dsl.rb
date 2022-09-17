@@ -35,5 +35,15 @@ module Emailbutler
     def update_message(message, args={})
       adapter.update_message(message, args)
     end
+
+    # Public: Groups messages by status and count them.
+    def count_messages_by_status
+      adapter.count_messages_by_status
+    end
+
+    # Public: Finds messages by args.
+    def find_messages_by(args={})
+      adapter.find_messages_by(args)
+    end
   end
 end

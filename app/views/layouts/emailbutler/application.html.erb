@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html id="emailbutler">
   <head>
     <title>Emailbutler</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'emailbutler/application', media: 'all' %>
+    <%= stylesheet_link_tag 'emailbutler', media: 'all' %>
   </head>
-  <body>
-    <%= yield %>
+  <body id="emailbutler-body">
+    <%= render 'emailbutler/ui/shared/header' %>
+    <div class="content">
+      <%= yield %>
+    </div>
+    <%= render 'emailbutler/ui/shared/footer' %>
   </body>
 </html>

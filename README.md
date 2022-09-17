@@ -63,5 +63,9 @@ end
 1. Each event with sending email will create new record with message params in database.
 2. Each webhook event will update status of message in database.
 
+### UI
+
+Emailbutler provides UI with rendering email tracking statistics - /emailbutler/ui/dashboard.
+
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

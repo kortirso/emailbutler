@@ -68,6 +68,16 @@ module Emailbutler
       rescue ::ActiveRecord::StaleObjectError
         update_message(message.reload, args)
       end
+
+      # Public: Groups messages by status and count them.
+      def count_messages_by_status
+        @message_class.group(:status).count
+      end
+
+      # Public: Finds messages by args.
+      def find_messages_by(args={})
+        @message_class.where(args).order(created_at: :desc)
+      end
     end
   end
 end

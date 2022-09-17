@@ -1,0 +1,28 @@
+<div id="dashboard">
+  <table class="messages" cellspacing="0">
+    <thead>
+      <tr>
+        <th>UUID</th>
+        <th>Mailer</th>
+        <th>Action</th>
+        <th>Send to</th>
+        <th>Params</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @messages.each do |message| %>
+        <tr>
+          <td><%= message.uuid %></td>
+          <td><%= message.mailer %></td>
+          <td><%= message.action %></td>
+          <td>
+            <% message.send_to.each do |receiver| %>
+              <p><%= receiver %></p>
+            <% end %>
+          </td>
+          <td><%= message.params %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

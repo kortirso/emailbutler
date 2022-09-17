@@ -1,1 +1,1 @@
-//= link_directory ../stylesheets/emailbutler .css
+//= link_directory ../stylesheets .css
