@@ -3,6 +3,7 @@
 ENV['RAILS_ENV'] ||= 'test'
 
 require_relative './dummy/config/environment'
+require_relative './support/auth_helper'
 
 require 'rspec/rails'
 require 'factory_bot_rails'
@@ -24,6 +25,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   config.include FactoryBot::Syntax::Methods
+  config.include AuthHelper, type: :controller
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

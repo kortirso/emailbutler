@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - UI for rendering dashboard with email tracking statistics
 - password protection for UI
 - endpoints for resending and deleting messages
+- tests for dashboard controller
 
 ## [0.2.3] - 2022-09-16
 ### Modified

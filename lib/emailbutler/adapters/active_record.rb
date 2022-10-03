@@ -95,6 +95,7 @@ module Emailbutler
       private
 
       # Private: Calls mailer resending.
+      # rubocop: disable Metrics/AbcSize
       def resend_message_with_mailer(message)
         mailer = message.mailer.constantize
         mailer = mailer.with(message.params['mailer_params']) if message.params['mailer_params'].present?
@@ -104,6 +105,7 @@ module Emailbutler
           mailer.method(message.action).call.deliver_now
         end
       end
+      # rubocop: enable Metrics/AbcSize
     end
   end
 end
