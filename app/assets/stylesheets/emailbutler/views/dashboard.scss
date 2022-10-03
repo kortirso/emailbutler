@@ -61,6 +61,34 @@
 
           td {
             padding: .125rem .25rem;
+
+            &.actions {
+              display: flex;
+
+              button {
+                box-shadow: none;
+                border: none;
+                cursor: pointer;
+                padding: .25rem;
+
+                &.resend {
+                  background: #bbf7d0;
+                  margin-right: .5rem;
+
+                  &:hover {
+                    background: #86efac;
+                  }
+                }
+
+                &.destroy {
+                  background: #fecaca;
+
+                  &:hover {
+                    background: #fca5a5;
+                  }
+                }
+              }
+            }
           }
         }
       }

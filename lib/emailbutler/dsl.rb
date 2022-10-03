@@ -45,5 +45,15 @@ module Emailbutler
     def find_messages_by(args={})
       adapter.find_messages_by(args)
     end
+
+    # Public: Resends the message.
+    def resend_message(message)
+      adapter.resend_message(message)
+    end
+
+    # Public: Destroys the message.
+    def destroy_message(message)
+      adapter.destroy_message(message)
+    end
   end
 end

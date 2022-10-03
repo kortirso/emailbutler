@@ -78,6 +78,32 @@ module Emailbutler
       def find_messages_by(args={})
         @message_class.where(args).order(created_at: :desc)
       end
+
+      # Public: Resends the message.
+      def resend_message(message)
+        ::ActiveRecord::Base.transaction do
+          message.destroy
+          resend_message_with_mailer(message)
+        end
+      end
+
+      # Public: Destroy the message.
+      def destroy_message(message)
+        message.destroy
+      end
+
+      private
+
+      # Private: Calls mailer resending.
+      def resend_message_with_mailer(message)
+        mailer = message.mailer.constantize
+        mailer = mailer.with(message.params['mailer_params']) if message.params['mailer_params'].present?
+        if message.params['action_params']
+          mailer.method(message.action).call(*message.params['action_params']).deliver_now
+        else
+          mailer.method(message.action).call.deliver_now
+        end
+      end
     end
   end
 end

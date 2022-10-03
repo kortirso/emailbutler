@@ -2,16 +2,19 @@
   <table class="messages" cellspacing="0">
     <thead>
       <tr>
+        <th>ID</th>
         <th>UUID</th>
         <th>Mailer</th>
         <th>Action</th>
         <th>Send to</th>
         <th>Params</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @messages.each do |message| %>
         <tr>
+          <td><%= message.id %></td>
           <td><%= message.uuid %></td>
           <td><%= message.mailer %></td>
           <td><%= message.action %></td>
@@ -21,6 +24,10 @@
             <% end %>
           </td>
           <td><%= message.params %></td>
+          <td class="actions">
+            <%= button_to 'Resend', ui_message_path(message.uuid), method: :patch, class: 'resend' %>
+            <%= button_to 'Destroy', ui_message_path(message.uuid), method: :delete, class: 'destroy' %>
+          </td>
         </tr>
       <% end %>
     </tbody>

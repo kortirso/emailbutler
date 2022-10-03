@@ -5,5 +5,6 @@ Emailbutler::Engine.routes.draw do
 
   namespace :ui do
     resources :dashboard, only: %i[index show]
+    resources :messages, only: %i[update destroy]
   end
 end
