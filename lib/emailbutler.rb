@@ -7,6 +7,7 @@ require 'emailbutler/engine'
 require 'emailbutler/configuration'
 require 'emailbutler/dsl'
 require 'emailbutler/webhooks/receiver'
+require 'emailbutler/helpers'
 require 'emailbutler/mailers/helpers'
 
 module Emailbutler

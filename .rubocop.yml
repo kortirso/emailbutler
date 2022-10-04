@@ -31,6 +31,9 @@ Style/ModuleFunction:
 Style/ClassAndModuleChildren:
   Enabled: false
 
+Style/OptionalBooleanParameter:
+  Enabled: false
+
 Layout/LineLength:
   Max: 120
 

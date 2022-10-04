@@ -5,6 +5,8 @@ require 'active_record'
 module Emailbutler
   module Adapters
     class ActiveRecord
+      include Emailbutler::Helpers
+
       # Abstract base class for internal models
       class Model < ::ActiveRecord::Base
         self.abstract_class = true
@@ -91,21 +93,6 @@ module Emailbutler
       def destroy_message(message)
         message.destroy
       end
-
-      private
-
-      # Private: Calls mailer resending.
-      # rubocop: disable Metrics/AbcSize
-      def resend_message_with_mailer(message)
-        mailer = message.mailer.constantize
-        mailer = mailer.with(message.params['mailer_params']) if message.params['mailer_params'].present?
-        if message.params['action_params']
-          mailer.method(message.action).call(*message.params['action_params']).deliver_now
-        else
-          mailer.method(message.action).call.deliver_now
-        end
-      end
-      # rubocop: enable Metrics/AbcSize
     end
   end
 end
