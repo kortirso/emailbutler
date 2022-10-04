@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - password protection for UI
 - endpoints for resending and deleting messages
 - tests for dashboard controller
+- tests for messages controller
 
 ## [0.2.3] - 2022-09-16
 ### Modified
