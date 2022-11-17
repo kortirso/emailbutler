@@ -25,9 +25,9 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'pg', '> 1.0'
-  spec.add_development_dependency 'puma', '> 5.0'
+  spec.add_development_dependency 'puma', '~> 6.0'
   spec.add_development_dependency 'rake', '~> 13.0'
-  spec.add_development_dependency 'rubocop', '~> 1.3'
+  spec.add_development_dependency 'rubocop', '~> 1.39'
   spec.add_development_dependency 'rubocop-performance', '~> 1.8'
   spec.add_development_dependency 'rubocop-rake', '~> 0.6'
   spec.add_development_dependency 'rubocop-rspec', '~> 2.0'
