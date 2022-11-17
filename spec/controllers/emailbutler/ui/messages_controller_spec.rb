@@ -22,7 +22,7 @@ describe Emailbutler::Ui::MessagesController do
       end
 
       it 'redirects to dashboard page' do
-        expect(response).to redirect_to ui_dashboard_index_path
+        expect(response).to redirect_to ui_index_path
       end
     end
 
@@ -57,7 +57,7 @@ describe Emailbutler::Ui::MessagesController do
         end
 
         it 'redirects to dashboard page' do
-          expect(response).to redirect_to ui_dashboard_index_path
+          expect(response).to redirect_to ui_index_path
         end
       end
     end
@@ -72,7 +72,7 @@ describe Emailbutler::Ui::MessagesController do
       end
 
       it 'redirects to dashboard page' do
-        expect(response).to redirect_to ui_dashboard_index_path
+        expect(response).to redirect_to ui_index_path
       end
     end
 
@@ -107,7 +107,7 @@ describe Emailbutler::Ui::MessagesController do
         end
 
         it 'redirects to dashboard page' do
-          expect(response).to redirect_to ui_dashboard_index_path
+          expect(response).to redirect_to ui_index_path
         end
       end
     end

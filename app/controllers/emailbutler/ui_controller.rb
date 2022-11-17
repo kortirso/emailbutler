@@ -6,6 +6,14 @@ module Emailbutler
                                  password: Emailbutler.configuration.ui_password,
                                  if: -> { basic_auth_enabled? }
 
+    def index
+      @summary = Emailbutler.count_messages_by_status
+    end
+
+    def show
+      @messages = Emailbutler.find_messages_by(status: params[:id])
+    end
+
     private
 
     def basic_auth_enabled?

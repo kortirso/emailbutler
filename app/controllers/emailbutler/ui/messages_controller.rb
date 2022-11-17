@@ -7,12 +7,12 @@ module Emailbutler
 
       def update
         Emailbutler.resend_message(@message)
-        redirect_to ui_dashboard_index_path
+        redirect_to ui_index_path
       end
 
       def destroy
         Emailbutler.destroy_message(@message)
-        redirect_to ui_dashboard_index_path
+        redirect_to ui_index_path
       end
 
       private
