@@ -42,6 +42,13 @@ Add this line to config/routes.rb
 mount Emailbutler::Engine => '/emailbutler'
 ```
 
+### UI styles
+
+For adding styles for UI you need to add this line to assets/config/manifest.js
+```js
+//= link emailbutler.css
+```
+
 ### Mailers
 
 Update you application mailer
