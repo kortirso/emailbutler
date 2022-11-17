@@ -6,7 +6,7 @@
     </li>
     <% Emailbutler.adapter.message_class.statuses.each_key do |status| %>
       <li>
-        <%= link_to ui_dashboard_path(status), class: 'status-summary' do %>
+        <%= link_to ui_path(status), class: 'status-summary' do %>
           <span><%= @summary[status].to_i %></span>
           <span><%= status.capitalize %></span>
         <% end %>
