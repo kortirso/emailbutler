@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Emailbutler::Ui::MessagesController, type: :controller do
+describe Emailbutler::Ui::MessagesController do
   routes { Emailbutler::Engine.routes }
 
   let(:configuration) { Emailbutler::Configuration.new }

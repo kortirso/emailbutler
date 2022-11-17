@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors     = ['Bogdanov Anton']
   spec.email       = ['kortirso@gmail.com']
   spec.homepage    = 'https://github.com/kortirso/emailbutler'
-  spec.summary     = 'Write a short summary, because RubyGems requires one.'
-  spec.description = 'Write a longer description or delete this line.'
+  spec.summary     = 'Email tracker for Ruby on Rails applications.'
+  spec.description = 'Emailbutler allows you to track delivery status of emails sent by your app.'
   spec.license     = 'MIT'
 
   spec.required_ruby_version = '>= 2.7'

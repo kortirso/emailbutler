@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Emailbutler::WebhooksController, type: :controller do
+describe Emailbutler::WebhooksController do
   routes { Emailbutler::Engine.routes }
 
   describe 'POST#create' do

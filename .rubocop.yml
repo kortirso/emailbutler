@@ -63,3 +63,6 @@ RSpec/MultipleMemoizedHelpers:
 
 Gemspec/RequireMFA:
   Enabled: false
+
+RSpec/FactoryBot/ConsistentParenthesesStyle:
+  Enabled: false
