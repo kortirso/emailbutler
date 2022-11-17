@@ -11,10 +11,19 @@ module Emailbutler
     end
 
     def show
-      @messages = Emailbutler.find_messages_by(status: params[:id])
+      @messages = Emailbutler.find_messages_by(search_condition)
     end
 
     private
+
+    def search_condition
+      {
+        status: params[:id],
+        mailer: params[:mailer_name].presence,
+        action: params[:action_name].presence,
+        send_to: [params[:receiver].presence].compact.presence
+      }.compact
+    end
 
     def basic_auth_enabled?
       configuration = Emailbutler.configuration

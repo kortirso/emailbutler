@@ -1,13 +1,30 @@
 <div id="dashboard">
+  <section class="search-form">
+    <%= form_with url: ui_path(params[:id]), method: :get do |form| %>
+      <div class="form-field">
+        <%= form.label :mailer_name, 'Mailer', class: 'form-label' %>
+        <%= form.text_field :mailer_name, class: 'form-value', value: params[:mailer_name] %>
+      </div>
+      <div class="form-field">
+        <%= form.label :action_name, 'Action', class: 'form-label' %>
+        <%= form.text_field :action_name, class: 'form-value', value: params[:action_name] %>
+      </div>
+      <div class="form-field">
+        <%= form.label :receiver, 'Receiver', class: 'form-label' %>
+        <%= form.text_field :receiver, class: 'form-value', value: params[:receiver] %>
+      </div>
+      <%= form.submit 'Search', class: 'button' %>
+    <% end %>
+  </section>
   <table class="messages" cellspacing="0">
     <thead>
       <tr>
         <th>ID</th>
-        <th>UUID</th>
         <th>Mailer</th>
         <th>Action</th>
         <th>Send to</th>
-        <th>Params</th>
+        <th>Action params</th>
+        <th>Mailer params</th>
         <th></th>
       </tr>
     </thead>
@@ -15,7 +32,6 @@
       <% @messages.each do |message| %>
         <tr>
           <td><%= message.id %></td>
-          <td><%= message.uuid %></td>
           <td><%= message.mailer %></td>
           <td><%= message.action %></td>
           <td>
@@ -23,10 +39,11 @@
               <p><%= receiver %></p>
             <% end %>
           </td>
-          <td><%= message.params %></td>
+          <td><%= message.params['action_params'] %></td>
+          <td><%= message.params['mailer_params'] %></td>
           <td class="actions">
-            <%= button_to 'Resend', ui_message_path(message.uuid), method: :patch, class: 'resend' %>
-            <%= button_to 'Destroy', ui_message_path(message.uuid), method: :delete, class: 'destroy' %>
+            <%= button_to 'Resend', ui_message_path(message.uuid), method: :patch, class: 'button' %>
+            <%= button_to 'Destroy', ui_message_path(message.uuid), method: :delete, class: 'button warning' %>
           </td>
         </tr>
       <% end %>
