@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    emailbutler (0.3.0)
+    emailbutler (0.4.0)
       rails (> 6.0.0)
       sass-rails
 
