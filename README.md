@@ -75,8 +75,12 @@ end
 
 ### UI
 
-Emailbutler provides UI with rendering email tracking statistics - /emailbutler/ui.
-And with opportunity to resend and/or destroy emails.
+Emailbutler provides UI with rendering email tracking statistics - /emailbutler/ui, with opportunity to search, resend and/or destroy emails.
+
+<img width="1463" alt="ui_index" src="https://user-images.githubusercontent.com/6195394/202743189-19d1845d-7991-494f-93c1-0dd92b0b5dac.png">
+
+<img width="1461" alt="ui_show" src="https://user-images.githubusercontent.com/6195394/202743225-b0ba0ca2-d373-428c-973d-5ec4566a3784.png">
+
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
