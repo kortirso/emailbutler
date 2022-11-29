@@ -1,8 +1,10 @@
 <div id="dashboard">
   <ul class="summary">
-    <li class="status-summary">
-      <span><%= @summary.values.sum %></span>
-      <span>Total</span>
+    <li>
+      <%= link_to ui_path(:all), class: 'status-summary' do %>
+        <span><%= @summary.values.sum %></span>
+        <span>Total</span>
+      <% end %>
     </li>
     <% Emailbutler.adapter.message_class.statuses.each_key do |status| %>
       <li>

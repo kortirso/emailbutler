@@ -25,6 +25,9 @@
           <th>Mailer</th>
           <th>Action</th>
           <th>Send to</th>
+          <% if params[:id] == 'all' %>
+            <th>Status</th>
+          <% end %>
           <th>Action params</th>
           <th>Mailer params</th>
           <th></th>
@@ -41,6 +44,9 @@
                 <p><%= receiver %></p>
               <% end %>
             </td>
+            <% if params[:id] == 'all' %>
+              <td><%= message.status %></td>
+            <% end %>
             <td><%= message.params['action_params'] %></td>
             <td><%= message.params['mailer_params'] %></td>
             <td class="actions">

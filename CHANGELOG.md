@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## Unreleased
 ### Added
 - pagination for show page list
+- rendering all messages with status in table
 
 ### Modified
 - passing arguments for webhooks

@@ -22,7 +22,7 @@ module Emailbutler
 
     def search_condition
       {
-        status: params[:id],
+        status: params[:id] == 'all' ? nil : params[:id],
         mailer: params[:mailer_name].presence,
         action: params[:action_name].presence,
         send_to: [params[:receiver].presence].compact.presence
