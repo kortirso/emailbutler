@@ -62,34 +62,52 @@
       flex: 1;
       height: 100%;
 
-      thead {
-        tr {
-          th {
-            text-align: left;
-            padding: .125rem .25rem;
+      .pagination {
+        margin-bottom: 1rem;
+
+        .page {
+          padding: .25rem .5rem;
+          background: #bbf7d0;
+          color: #000;
+
+          a {
+            color: #000;
           }
         }
       }
 
-      tbody {
-        tr {
-          &:nth-of-type(odd) {
-            background: #e5e7eb;
+      table {
+        width: 100%;
+
+        thead {
+          tr {
+            th {
+              text-align: left;
+              padding: .125rem .25rem;
+            }
           }
+        }
 
-          &:hover {
-            background: #d1d5db;
-          }
+        tbody {
+          tr {
+            &:nth-of-type(odd) {
+              background: #e5e7eb;
+            }
 
-          td {
-            padding: .125rem .25rem;
+            &:hover {
+              background: #d1d5db;
+            }
 
-            &.actions {
-              display: flex;
+            td {
+              padding: .125rem .25rem;
 
-              button {
-                &:nth-of-type(1) {
-                  margin-right: .5rem;
+              &.actions {
+                display: flex;
+
+                button {
+                  &:nth-of-type(1) {
+                    margin-right: .5rem;
+                  }
                 }
               }
             }

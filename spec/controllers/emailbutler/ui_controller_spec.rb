@@ -8,7 +8,7 @@ describe Emailbutler::UiController do
   before do
     allow(Emailbutler).to receive(:configuration).and_return(configuration)
     allow(Emailbutler).to receive(:count_messages_by_status)
-    allow(Emailbutler).to receive(:find_messages_by)
+    allow(Emailbutler).to receive(:find_messages_by).and_return(Emailbutler.adapter.message_class.all)
   end
 
   describe 'GET#index' do

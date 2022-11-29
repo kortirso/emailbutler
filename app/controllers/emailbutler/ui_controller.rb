@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require 'pagy'
+
 module Emailbutler
   class UiController < Emailbutler::ApplicationController
+    include Pagy::Backend
+
     http_basic_authenticate_with name: Emailbutler.configuration.ui_username,
                                  password: Emailbutler.configuration.ui_password,
                                  if: -> { basic_auth_enabled? }
@@ -11,7 +15,7 @@ module Emailbutler
     end
 
     def show
-      @messages = Emailbutler.find_messages_by(search_condition)
+      @pagy, @messages = pagy(Emailbutler.find_messages_by(search_condition))
     end
 
     private
