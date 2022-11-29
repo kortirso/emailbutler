@@ -12,8 +12,8 @@ module Emailbutler
           'dropped' => 'failed'
         }.freeze
 
-        def self.call(args={})
-          new.call(**args)
+        def self.call(...)
+          new.call(...)
         end
 
         def call(payload:)

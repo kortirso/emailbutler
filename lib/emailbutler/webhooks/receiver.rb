@@ -7,8 +7,8 @@ module Emailbutler
     class Receiver
       SENDGRID_USER_AGENT = 'SendGrid Event API'
 
-      def self.call(args={})
-        new.call(**args)
+      def self.call(...)
+        new.call(...)
       end
 
       def call(user_agent:, payload:)
