@@ -16,7 +16,7 @@ describe Emailbutler::WebhooksController do
     }
 
     before do
-      allow(::Emailbutler::Webhooks::Receiver).to receive(:call)
+      allow(Emailbutler::Webhooks::Receiver).to receive(:call)
 
       request.headers['User-Agent'] = 'SendGrid Event API'
 
@@ -24,7 +24,7 @@ describe Emailbutler::WebhooksController do
     end
 
     it 'calls webhooks receiver' do
-      expect(::Emailbutler::Webhooks::Receiver).to(
+      expect(Emailbutler::Webhooks::Receiver).to(
         have_received(:call).with(user_agent: 'SendGrid Event API', payload: params)
       )
     end
