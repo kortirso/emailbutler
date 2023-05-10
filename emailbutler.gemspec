@@ -24,7 +24,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails', '> 6.0.0'
   spec.add_dependency 'sass-rails'
 
+  # rubocop: disable Gemspec/DevelopmentDependencies
   spec.add_development_dependency 'bundler'
+  # rubocop: enable Gemspec/DevelopmentDependencies
   spec.add_development_dependency 'pg', '> 1.0'
   spec.add_development_dependency 'puma', '~> 6.0'
   spec.add_development_dependency 'rake', '~> 13.0'
