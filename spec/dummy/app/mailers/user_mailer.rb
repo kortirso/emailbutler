@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
     mail(
       to: 'user@gmail.com',
       subject: 'Invite email',
-      message_id: @message.uuid
+      message_id: @emailbutler_message.uuid
     )
   end
 end

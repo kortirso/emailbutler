@@ -19,7 +19,7 @@ module Emailbutler
       end
 
       def build_emailbutler_message(args)
-        @message = Emailbutler.build_message(
+        @emailbutler_message = Emailbutler.build_message(
           mailer: self.class.to_s,
           action: action_name,
           params: serialize({ mailer_params: params, action_params: args[1..] }, false)
@@ -27,8 +27,8 @@ module Emailbutler
       end
 
       def save_emailbutler_message
-        Emailbutler.set_message_attribute(@message, :send_to, mail.to)
-        Emailbutler.save_message(@message)
+        Emailbutler.set_message_attribute(@emailbutler_message, :send_to, message.to)
+        Emailbutler.save_message(@emailbutler_message)
       end
     end
   end

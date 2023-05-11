@@ -5,7 +5,7 @@ class TestMailer < ApplicationMailer
     mail(
       to: 'user@gmail.com',
       subject: 'Test email',
-      message_id: @message.uuid
+      message_id: @emailbutler_message.uuid
     )
   end
 end
