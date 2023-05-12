@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    emailbutler (0.5.3)
-      pagy (> 5.0)
+    emailbutler (0.5.5)
+      pagy (> 4.0)
       rails (> 6.0.0)
-      sass-rails
+      sassc-rails
 
 GEM
   remote: https://rubygems.org/
@@ -212,8 +212,6 @@ GEM
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
-    sass-rails (6.0.0)
-      sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
