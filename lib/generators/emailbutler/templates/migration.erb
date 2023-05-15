@@ -1,6 +1,5 @@
 class CreateEmailbutlerTables < ActiveRecord::Migration<%= migration_version %>
   def self.up
-    enable_extension 'pgcrypto' unless extensions.include?('pgcrypto')
     enable_extension 'uuid-ossp' unless extensions.include?('uuid-ossp')
 
     create_table :emailbutler_messages do |t|
