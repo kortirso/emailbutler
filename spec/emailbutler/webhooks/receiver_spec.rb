@@ -9,7 +9,12 @@ describe Emailbutler::Webhooks::Receiver do
     let(:timestamp) { 1_662_059_116 }
     let(:user_agent) { Emailbutler::Webhooks::Receiver::SENDGRID_USER_AGENT }
     let(:payload) {
-      { '_json' => [{ 'smtp-id' => message.uuid, 'event' => 'processed', 'timestamp' => timestamp }] }
+      {
+        '_json' => [
+          { 'smtp-id' => message.uuid, 'event' => 'processed', 'timestamp' => timestamp },
+          { 'smtp-id' => 'unexisting', 'event' => 'processed', 'timestamp' => timestamp }
+        ]
+      }
     }
 
     it 'updates message', :aggregate_failures do

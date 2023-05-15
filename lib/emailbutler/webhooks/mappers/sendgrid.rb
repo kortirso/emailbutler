@@ -7,9 +7,12 @@ module Emailbutler
         DELIVERABILITY_MAPPER = {
           'processed' => 'processed',
           'delivered' => 'delivered',
+          'open' => 'delivered',
+          'click' => 'delivered',
           'deferred' => 'failed',
           'bounce' => 'failed',
-          'dropped' => 'failed'
+          'dropped' => 'failed',
+          'spamreport' => 'failed'
         }.freeze
 
         def self.call(...)
