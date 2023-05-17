@@ -29,7 +29,7 @@ module Emailbutler
             {
               message_uuid: message_uuid,
               status: status,
-              timestamp: message['timestamp'] ? Time.at(message['timestamp']).utc.to_datetime : nil
+              timestamp: message['timestamp'] ? Time.at(message['timestamp'].to_i).utc.to_datetime : nil
             }
           }
         end
