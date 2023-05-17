@@ -21,14 +21,15 @@ module Emailbutler
 
         def call(payload:)
           payload['_json'].filter_map { |message|
-            message_uuid = message['smtp-id']
+            message.stringify_keys!
+            message_uuid = message['smtp-id'] || message['sg_message_id']
             status = DELIVERABILITY_MAPPER[message['event']]
-            next unless message_uuid || status
+            next if message_uuid.nil? || status.nil?
 
             {
               message_uuid: message_uuid,
               status: status,
-              timestamp: Time.at(message['timestamp']).utc.to_datetime
+              timestamp: message['timestamp'] ? Time.at(message['timestamp']).utc.to_datetime : nil
             }
           }
         end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    emailbutler (0.5.7)
+    emailbutler (0.5.8)
       pagy (> 4.0)
       rails (> 6.0.0)
       sassc-rails
