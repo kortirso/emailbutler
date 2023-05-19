@@ -4,8 +4,7 @@ class UserMailer < ApplicationMailer
   def send_invite_email(*)
     mail(
       to: 'user@gmail.com',
-      subject: 'Invite email',
-      message_id: @emailbutler_message.uuid
+      subject: 'Invite email'
     )
   end
 end

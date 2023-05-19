@@ -27,6 +27,7 @@ module Emailbutler
       end
 
       def save_emailbutler_message
+        message.message_id = @emailbutler_message.uuid
         Emailbutler.set_message_attribute(@emailbutler_message, :send_to, message.to)
         Emailbutler.save_message(@emailbutler_message)
       end
