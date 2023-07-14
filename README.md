@@ -2,6 +2,10 @@
 Simple email tracker for Ruby on Rails applications.
 Emailbutler allows you to track delivery status of emails sent by your app.
 
+There are situations when you need to check whether a certain letter or certain type of letters was successfully sent from the application, and through the UI of some providers you can try to find such a letter by the recipient or the subject of the letter, but sometimes it's not enough.
+
+Emailbutler allows you to monitor the sending of letters, collects notifications from providers about the success of delivery and adds an UI for monitoring deliveries with filtering by recipients, mailers and actions.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -42,12 +46,46 @@ Add this line to config/routes.rb
 mount Emailbutler::Engine => '/emailbutler'
 ```
 
+#### Custom routes
+
+If you need some custom behaviour you can specify your own route and use custom controller, something like
+
+```ruby
+class SendgridController < ApplicationController
+  skip_before_action :basic_authentication
+  skip_before_action :verify_authenticity_token
+
+  def create
+    ... you can add some logic here
+
+    ::Emailbutler::Webhooks::Receiver.call(
+      user_agent: ::Emailbutler::Webhooks::Receiver::SENDGRID_USER_AGENT,
+      payload: receiver_params.to_h
+    )
+
+    head :ok
+  end
+
+  private
+
+  def receiver_params
+    params.permit('_json' => %w[smtp-id event timestamp sg_message_id])
+  end
+end
+```
+
 ### UI styles
 
 For adding styles for UI you need to add this line to assets/config/manifest.js
 ```js
 //= link emailbutler.css
 ```
+
+Or in some cases you can specify it in assets/javascript/application.js
+
+```js
+//= require emailbutler_manifest
+````
 
 ### Mailers
 
@@ -80,7 +118,6 @@ Emailbutler provides UI with rendering email tracking statistics - /emailbutler/
 <img width="1463" alt="ui_index" src="https://user-images.githubusercontent.com/6195394/202743189-19d1845d-7991-494f-93c1-0dd92b0b5dac.png">
 
 <img width="1461" alt="ui_show" src="https://user-images.githubusercontent.com/6195394/202743225-b0ba0ca2-d373-428c-973d-5ec4566a3784.png">
-
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

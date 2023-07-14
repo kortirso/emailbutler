@@ -4,18 +4,18 @@ require 'pagy'
 
 module Emailbutler
   class UiController < Emailbutler::ApplicationController
-    include Pagy::Backend
+    include ::Pagy::Backend
 
-    http_basic_authenticate_with name: Emailbutler.configuration.ui_username,
-                                 password: Emailbutler.configuration.ui_password,
+    http_basic_authenticate_with name: ::Emailbutler.configuration.ui_username,
+                                 password: ::Emailbutler.configuration.ui_password,
                                  if: -> { basic_auth_enabled? }
 
     def index
-      @summary = Emailbutler.count_messages_by_status
+      @summary = ::Emailbutler.count_messages_by_status
     end
 
     def show
-      @pagy, @messages = pagy(Emailbutler.find_messages_by(search_condition))
+      @pagy, @messages = pagy(::Emailbutler.find_messages_by(search_condition))
     end
 
     private
@@ -30,7 +30,7 @@ module Emailbutler
     end
 
     def basic_auth_enabled?
-      configuration = Emailbutler.configuration
+      configuration = ::Emailbutler.configuration
 
       return false if configuration.ui_username.blank?
       return false if configuration.ui_password.blank?

@@ -2,8 +2,8 @@
 
 ENV['RAILS_ENV'] ||= 'test'
 
-require_relative './dummy/config/environment'
-require_relative './support/auth_helper'
+require_relative 'dummy/config/environment'
+require_relative 'support/auth_helper'
 
 require 'rspec/rails'
 require 'factory_bot_rails'

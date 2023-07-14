@@ -6,19 +6,19 @@ module Emailbutler
       before_action :find_message
 
       def update
-        Emailbutler.resend_message(@message)
+        ::Emailbutler.resend_message(@message)
         redirect_to ui_index_path
       end
 
       def destroy
-        Emailbutler.destroy_message(@message)
+        ::Emailbutler.destroy_message(@message)
         redirect_to ui_index_path
       end
 
       private
 
       def find_message
-        @message = Emailbutler.find_message_by(uuid: params[:id])
+        @message = ::Emailbutler.find_message_by(uuid: params[:id])
       end
     end
   end

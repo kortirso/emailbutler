@@ -2,6 +2,7 @@ require:
   - rubocop-performance
   - rubocop-rake
   - rubocop-rspec
+  - rubocop-factory_bot
 
 AllCops:
   Exclude:
@@ -63,6 +64,9 @@ RSpec/MultipleMemoizedHelpers:
 
 Gemspec/RequireMFA:
   Enabled: false
+
+Gemspec/DevelopmentDependencies:
+  EnforcedStyle: gemspec
 
 FactoryBot/ConsistentParenthesesStyle:
   Enabled: false
