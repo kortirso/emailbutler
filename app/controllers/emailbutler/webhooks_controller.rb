@@ -2,7 +2,7 @@
 
 module Emailbutler
   class WebhooksController < Emailbutler::ApplicationController
-    skip_before_action :verify_authenticity_token
+    skip_before_action(*Emailbutler.configuration.skip_before_actions)
 
     def create
       ::Emailbutler::Webhooks::Receiver.call(
