@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## Unreleased
 ### Added
 - SMTP2GO webhooks integration
+- Github Actions integration
 
 ## [0.6.1] - 2023-07-14
 ### Modified
