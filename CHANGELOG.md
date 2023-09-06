@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - SMTP2GO webhooks integration
 - Github Actions integration
+- list of skip_before_action for webhooks controller
 
 ## [0.6.1] - 2023-07-14
 ### Modified

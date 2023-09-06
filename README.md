@@ -36,6 +36,7 @@ Emailbutler.configure do |config|
   config.ui_username = 'username'
   config.ui_password = 'password'
   config.ui_secured_environments = ['production']
+  config.skip_before_actions = %i[verify_authenticity_token]
 end
 ```
 
