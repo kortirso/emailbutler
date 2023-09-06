@@ -16,7 +16,10 @@ module Emailbutler
     private
 
     def receiver_params
-      params.permit('_json' => %w[smtp-id event timestamp sg_message_id])
+      params.permit(
+        'event', 'sendtime', 'message-id',
+        '_json' => %w[event timestamp smtp-id sg_message_id]
+      )
     end
   end
 end

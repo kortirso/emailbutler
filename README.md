@@ -1,6 +1,6 @@
 # Emailbutler
 Simple email tracker for Ruby on Rails applications.
-Emailbutler allows you to track delivery status of emails sent by your app.
+Emailbutler allows you to track delivery status of emails sent by your app through Sendgrid and/or SMTP2GO.
 
 There are situations when you need to check whether a certain letter or certain type of letters was successfully sent from the application, and through the UI of some providers you can try to find such a letter by the recipient or the subject of the letter, but sometimes it's not enough.
 
@@ -59,7 +59,7 @@ class SendgridController < ApplicationController
     ... you can add some logic here
 
     ::Emailbutler::Webhooks::Receiver.call(
-      user_agent: ::Emailbutler::Webhooks::Receiver::SENDGRID_USER_AGENT,
+      user_agent: request.headers['HTTP_USER_AGENT'],
       payload: receiver_params.to_h
     )
 
@@ -69,7 +69,10 @@ class SendgridController < ApplicationController
   private
 
   def receiver_params
-    params.permit('_json' => %w[smtp-id event timestamp sg_message_id])
+    params.permit(
+      'event', 'sendtime', 'message-id',
+      '_json' => %w[event timestamp smtp-id sg_message_id]
+    )
   end
 end
 ```
@@ -102,6 +105,14 @@ end
 
 - go to [Mail settings](https://app.sendgrid.com/settings/mail_settings),
 - turn on Event Webhook,
+- in the HTTP POST URL field, paste the URL to webhook controller of your app,
+- select all deliverability data,
+- save settings.
+
+#### SMTP2GO
+
+- go to [Mail settings](https://app-eu.smtp2go.com/settings/webhooks),
+- turn on Webhooks,
 - in the HTTP POST URL field, paste the URL to webhook controller of your app,
 - select all deliverability data,
 - save settings.
