@@ -4,9 +4,9 @@ describe Emailbutler::Webhooks::Receiver do
   subject(:receiver_call) { described_class.call(user_agent: user_agent, payload: payload) }
 
   let!(:message) { create :emailbutler_message }
+  let(:timestamp) { 1_662_059_116 }
 
   context 'for sendgrid' do
-    let(:timestamp) { 1_662_059_116 }
     let(:user_agent) { Emailbutler::Webhooks::Receiver::SENDGRID_USER_AGENT }
     let(:payload) {
       {
@@ -18,6 +18,20 @@ describe Emailbutler::Webhooks::Receiver do
           { sg_message_id: '6rUcWo6KQAKG7V3S0YbxOw', event: 'click', timestamp: '1684251474' }
         ]
       }
+    }
+
+    it 'updates message', :aggregate_failures do
+      receiver_call
+
+      expect(message.reload.status).to eq 'processed'
+      expect(message.reload.timestamp).to eq Time.at(timestamp).utc.to_datetime
+    end
+  end
+
+  context 'for smtp2go' do
+    let(:user_agent) { Emailbutler::Webhooks::Receiver::SMTP2GO_USER_AGENT }
+    let(:payload) {
+      { 'message-id' => message.uuid, 'event' => 'processed', 'sendtime' => timestamp }
     }
 
     it 'updates message', :aggregate_failures do
