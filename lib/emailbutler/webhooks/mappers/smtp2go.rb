@@ -20,7 +20,8 @@ module Emailbutler
 
         def call(payload:)
           payload.stringify_keys!
-          message_uuid = payload['message-id']
+          # message-id contains data like <uuid>
+          message_uuid = payload['message-id'][1..-2]
           status = DELIVERABILITY_MAPPER[payload['event']]
           return [] if message_uuid.nil? || status.nil?
 

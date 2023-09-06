@@ -31,7 +31,7 @@ describe Emailbutler::Webhooks::Receiver do
   context 'for smtp2go' do
     let(:user_agent) { Emailbutler::Webhooks::Receiver::SMTP2GO_USER_AGENT }
     let(:payload) {
-      { 'message-id' => message.uuid, 'event' => 'processed', 'sendtime' => timestamp }
+      { 'message-id' => "<#{message.uuid}>", 'event' => 'processed', 'sendtime' => timestamp }
     }
 
     it 'updates message', :aggregate_failures do

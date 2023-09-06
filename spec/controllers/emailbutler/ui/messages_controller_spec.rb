@@ -17,11 +17,8 @@ describe Emailbutler::Ui::MessagesController do
     context 'without authorization' do
       before { patch :update, params: { id: message.uuid } }
 
-      it 'calls resending message' do
+      it 'calls resending message', :aggregate_failures do
         expect(Emailbutler).to have_received(:resend_message)
-      end
-
-      it 'redirects to dashboard page' do
         expect(response).to redirect_to ui_index_path
       end
     end
@@ -36,11 +33,8 @@ describe Emailbutler::Ui::MessagesController do
       context 'without valid username/password' do
         before { patch :update, params: { id: message.uuid } }
 
-        it 'does not call resending message' do
+        it 'does not call resending message', :aggregate_failures do
           expect(Emailbutler).not_to have_received(:resend_message)
-        end
-
-        it 'returns unauthorized response' do
           expect(response).to have_http_status :unauthorized
         end
       end
@@ -52,11 +46,8 @@ describe Emailbutler::Ui::MessagesController do
           patch :update, params: { id: message.uuid }
         end
 
-        it 'calls resending message' do
+        it 'calls resending message', :aggregate_failures do
           expect(Emailbutler).to have_received(:resend_message)
-        end
-
-        it 'redirects to dashboard page' do
           expect(response).to redirect_to ui_index_path
         end
       end
@@ -67,11 +58,8 @@ describe Emailbutler::Ui::MessagesController do
     context 'without authorization' do
       before { delete :destroy, params: { id: message.uuid } }
 
-      it 'calls resending message' do
+      it 'calls resending message', :aggregate_failures do
         expect(Emailbutler).to have_received(:destroy_message)
-      end
-
-      it 'redirects to dashboard page' do
         expect(response).to redirect_to ui_index_path
       end
     end
@@ -86,11 +74,8 @@ describe Emailbutler::Ui::MessagesController do
       context 'without valid username/password' do
         before { delete :destroy, params: { id: message.uuid } }
 
-        it 'does not call resending message' do
+        it 'does not call resending message', :aggregate_failures do
           expect(Emailbutler).not_to have_received(:destroy_message)
-        end
-
-        it 'returns unauthorized response' do
           expect(response).to have_http_status :unauthorized
         end
       end
@@ -102,11 +87,8 @@ describe Emailbutler::Ui::MessagesController do
           delete :destroy, params: { id: message.uuid }
         end
 
-        it 'calls resending message' do
+        it 'calls resending message', :aggregate_failures do
           expect(Emailbutler).to have_received(:destroy_message)
-        end
-
-        it 'redirects to dashboard page' do
           expect(response).to redirect_to ui_index_path
         end
       end

@@ -6,20 +6,18 @@ describe Emailbutler::UiController do
   let(:configuration) { Emailbutler::Configuration.new }
 
   before do
-    allow(Emailbutler).to receive(:configuration).and_return(configuration)
+    allow(Emailbutler).to(
+      receive_messages(configuration: configuration, find_messages_by: Emailbutler.adapter.message_class.all)
+    )
     allow(Emailbutler).to receive(:count_messages_by_status)
-    allow(Emailbutler).to receive(:find_messages_by).and_return(Emailbutler.adapter.message_class.all)
   end
 
   describe 'GET#index' do
     context 'without authorization' do
       before { get :index }
 
-      it 'counts messages' do
+      it 'counts messages', :aggregate_failures do
         expect(Emailbutler).to have_received(:count_messages_by_status)
-      end
-
-      it 'returns successful response' do
         expect(response).to be_successful
       end
     end
@@ -34,11 +32,8 @@ describe Emailbutler::UiController do
       context 'without valid username/password' do
         before { get :index }
 
-        it 'does not count messages' do
+        it 'does not count messages', :aggregate_failures do
           expect(Emailbutler).not_to have_received(:count_messages_by_status)
-        end
-
-        it 'returns unauthorized response' do
           expect(response).to have_http_status :unauthorized
         end
       end
@@ -50,11 +45,8 @@ describe Emailbutler::UiController do
           get :index
         end
 
-        it 'counts messages' do
+        it 'counts messages', :aggregate_failures do
           expect(Emailbutler).to have_received(:count_messages_by_status)
-        end
-
-        it 'returns successful response' do
           expect(response).to be_successful
         end
       end
@@ -65,11 +57,8 @@ describe Emailbutler::UiController do
     context 'without authorization' do
       before { get :show, params: { id: 'created' } }
 
-      it 'finds messages' do
+      it 'finds messages', :aggregate_failures do
         expect(Emailbutler).to have_received(:find_messages_by)
-      end
-
-      it 'returns successful response' do
         expect(response).to be_successful
       end
     end
@@ -84,11 +73,8 @@ describe Emailbutler::UiController do
       context 'without valid username/password' do
         before { get :show, params: { id: 'created' } }
 
-        it 'does not find messages' do
+        it 'does not find messages', :aggregate_failures do
           expect(Emailbutler).not_to have_received(:find_messages_by)
-        end
-
-        it 'returns unauthorized response' do
           expect(response).to have_http_status :unauthorized
         end
       end
@@ -100,11 +86,8 @@ describe Emailbutler::UiController do
           get :show, params: { id: 'created' }
         end
 
-        it 'finds messages' do
+        it 'finds messages', :aggregate_failures do
           expect(Emailbutler).to have_received(:find_messages_by)
-        end
-
-        it 'returns successful response' do
           expect(response).to be_successful
         end
       end
