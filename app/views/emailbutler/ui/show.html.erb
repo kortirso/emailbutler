@@ -40,7 +40,7 @@
             <td><%= message.mailer %></td>
             <td><%= message.action %></td>
             <td>
-              <% message.send_to.each do |receiver| %>
+              <% message.send_to&.each do |receiver| %>
                 <p><%= receiver %></p>
               <% end %>
             </td>
