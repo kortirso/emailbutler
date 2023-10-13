@@ -11,6 +11,7 @@ Emailbutler allows you to monitor the sending of letters, collects notifications
 Add this line to your application's Gemfile:
 ```ruby
 gem 'emailbutler'
+gem 'pagy'
 ```
 
 And then execute:
