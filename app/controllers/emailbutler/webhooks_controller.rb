@@ -2,8 +2,6 @@
 
 module Emailbutler
   class WebhooksController < Emailbutler::ApplicationController
-    skip_before_action(*Emailbutler.configuration.skip_before_actions)
-
     def create
       ::Emailbutler::Webhooks::Receiver.call(
         user_agent: request.headers['HTTP_USER_AGENT'],
