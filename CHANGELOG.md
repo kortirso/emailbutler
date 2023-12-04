@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.7.4] - 2023-12-04
+### Fixed
+- skiping verify_authenticity_token
+
 ## [0.7.3] - 2023-12-01
 ### Modified
 - inheritance from ActionController::Base
