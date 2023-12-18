@@ -23,6 +23,7 @@ module Emailbutler
 
     def serialize_value(value)
       return value.to_global_id.to_s if value.respond_to?(:to_global_id)
+      return nil unless value&.valid_encoding?
 
       value
     end
