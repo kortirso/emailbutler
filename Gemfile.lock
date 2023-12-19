@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    emailbutler (0.7.4)
+    emailbutler (0.7.5)
       pagy (> 4.0)
       rails (> 6.0.0)
       sassc-rails
@@ -129,7 +129,7 @@ GEM
     mini_mime (1.1.5)
     minitest (5.20.0)
     mutex_m (0.2.0)
-    net-imap (0.4.7)
+    net-imap (0.4.8)
       date
       net-protocol
     net-pop (0.1.2)
