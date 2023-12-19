@@ -4,7 +4,14 @@ describe TestMailer do
   describe '#send_simple_email' do
     let(:message_class) { Emailbutler.adapter.message_class }
     let!(:message) { create :emailbutler_message }
-    let(:mail) { described_class.with(mailer_param: 'mailer param').send_simple_email(message: message) }
+    let(:mail) {
+      described_class
+        .with(mailer_param: 'mailer param')
+        .send_simple_email(
+          message: message,
+          file: "%PDF-1.4\n%\xE2\xE3\xCF\xD3\n3 0 obj\n[/PDF/Text/ImageB/ImageC/ImageI]\nendobj\n4 0 obj\n<</Type/Font"
+        )
+    }
 
     it 'creates Message object' do
       expect { mail.deliver_now }.to change(message_class, :count).by(1)
@@ -20,7 +27,7 @@ describe TestMailer do
       expect(last_message.params).to(
         eq(
           'mailer_params' => { 'mailer_param' => 'mailer param' },
-          'action_params' => [{ 'message' => "gid://dummy/Emailbutler::Message/#{message.id}" }]
+          'action_params' => [{ 'message' => "gid://dummy/Emailbutler::Message/#{message.id}", 'file' => nil }]
         )
       )
       expect(last_message.send_to).to eq ['user@gmail.com']
