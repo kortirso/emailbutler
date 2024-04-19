@@ -62,6 +62,7 @@
       flex: 1;
       height: 100%;
 
+      // styles for backcompability with gem pagy < 7.0
       .pagination {
         margin-bottom: 1rem;
 
@@ -73,6 +74,19 @@
           a {
             color: #000;
           }
+        }
+      }
+
+      // styles for gem pagy >= 7.0
+      nav.pagy.nav {
+        margin-bottom: 1rem;
+
+        a {
+          padding: .25rem .5rem;
+          margin-right: .25rem;
+          background: #bbf7d0;
+          color: #000;
+          border-radius: .125rem;
         }
       }
 
