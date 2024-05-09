@@ -6,9 +6,9 @@ require 'emailbutler/version'
 require 'emailbutler/engine'
 require 'emailbutler/configuration'
 require 'emailbutler/dsl'
-require 'emailbutler/webhooks/receiver'
 require 'emailbutler/helpers'
 require 'emailbutler/mailers/helpers'
+require 'emailbutler/container'
 
 module Emailbutler
   extend self

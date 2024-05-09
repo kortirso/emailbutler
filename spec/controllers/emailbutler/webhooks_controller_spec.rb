@@ -3,7 +3,11 @@
 describe Emailbutler::WebhooksController do
   routes { Emailbutler::Engine.routes }
 
+  let(:webhooks_receiver) { Emailbutler::Container.resolve('webhooks_receiver') }
+
   describe 'POST#create' do
+    before { allow(webhooks_receiver).to receive(:call) }
+
     context 'for sendgrid' do
       let(:params) {
         {
@@ -17,15 +21,13 @@ describe Emailbutler::WebhooksController do
       }
 
       before do
-        allow(Emailbutler::Webhooks::Receiver).to receive(:call)
-
         request.headers['User-Agent'] = 'SendGrid Event API'
 
         post :create, params: params
       end
 
       it 'calls webhooks receiver', :aggregate_failures do
-        expect(Emailbutler::Webhooks::Receiver).to(
+        expect(webhooks_receiver).to(
           have_received(:call).with(user_agent: 'SendGrid Event API', payload: params)
         )
         expect(response).to be_successful
@@ -41,15 +43,13 @@ describe Emailbutler::WebhooksController do
       }
 
       before do
-        allow(Emailbutler::Webhooks::Receiver).to receive(:call)
-
         request.headers['User-Agent'] = 'Go-http-client/1.1'
 
         post :create, params: params
       end
 
       it 'calls webhooks receiver', :aggregate_failures do
-        expect(Emailbutler::Webhooks::Receiver).to(
+        expect(webhooks_receiver).to(
           have_received(:call).with(user_agent: 'Go-http-client/1.1', payload: params)
         )
         expect(response).to be_successful

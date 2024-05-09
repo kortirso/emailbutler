@@ -1,25 +1,13 @@
 # frozen_string_literal: true
 
-require 'emailbutler/webhooks/mappers/sendgrid'
-require 'emailbutler/webhooks/mappers/smtp2go'
-
 module Emailbutler
   module Webhooks
     class Receiver
       SENDGRID_USER_AGENT = 'SendGrid Event API'
       SMTP2GO_USER_AGENT = 'Go-http-client/1.1'
 
-      RECEIVERS_MAPPER = {
-        'SendGrid Event API' => Emailbutler::Webhooks::Mappers::Sendgrid,
-        'Go-http-client/1.1' => Emailbutler::Webhooks::Mappers::Smtp2Go
-      }.freeze
-
-      def self.call(...)
-        new.call(...)
-      end
-
       def call(user_agent:, payload:)
-        mapper = RECEIVERS_MAPPER[user_agent]
+        mapper = receivers_mapper(user_agent)
         return unless mapper
 
         mapper
@@ -30,6 +18,15 @@ module Emailbutler
 
             Emailbutler.update_message(message, event)
           }
+      end
+
+      private
+
+      def receivers_mapper(user_agent)
+        case user_agent
+        when SENDGRID_USER_AGENT then Emailbutler::Container.resolve('sendgrid_mapper')
+        when SMTP2GO_USER_AGENT then Emailbutler::Container.resolve('smtp2go_mapper')
+        end
       end
     end
   end

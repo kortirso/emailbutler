@@ -5,7 +5,7 @@ module Emailbutler
     skip_before_action :verify_authenticity_token
 
     def create
-      ::Emailbutler::Webhooks::Receiver.call(
+      Emailbutler::Container.resolve('webhooks_receiver').call(
         user_agent: request.headers['HTTP_USER_AGENT'],
         payload: receiver_params.to_h
       )

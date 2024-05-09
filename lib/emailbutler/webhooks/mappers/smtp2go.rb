@@ -14,10 +14,6 @@ module Emailbutler
           'spam' => 'failed'
         }.freeze
 
-        def self.call(...)
-          new.call(...)
-        end
-
         def call(payload:)
           payload.stringify_keys!
           # message-id contains data like <uuid>

@@ -15,10 +15,6 @@ module Emailbutler
           'spamreport' => 'failed'
         }.freeze
 
-        def self.call(...)
-          new.call(...)
-        end
-
         def call(payload:)
           payload['_json'].filter_map { |message|
             message.stringify_keys!

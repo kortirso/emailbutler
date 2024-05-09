@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe Emailbutler::Webhooks::Receiver do
-  subject(:receiver_call) { described_class.call(user_agent: user_agent, payload: payload) }
+  subject(:receiver_call) { described_class.new.call(user_agent: user_agent, payload: payload) }
 
   let!(:message) { create :emailbutler_message }
   let(:timestamp) { 1_662_059_116 }

@@ -2,6 +2,8 @@ PATH
   remote: .
   specs:
     emailbutler (0.7.6)
+      dry-auto_inject (~> 1.0)
+      dry-container (~> 0.11.0)
       pagy (> 4.0)
       rails (> 6.0.0)
       sassc-rails
@@ -100,6 +102,14 @@ GEM
     diff-lcs (1.5.0)
     drb (2.2.0)
       ruby2_keywords
+    dry-auto_inject (1.0.1)
+      dry-core (~> 1.0)
+      zeitwerk (~> 2.6)
+    dry-container (0.11.0)
+      concurrent-ruby (~> 1.0)
+    dry-core (1.0.1)
+      concurrent-ruby (~> 1.0)
+      zeitwerk (~> 2.6)
     erubi (1.12.0)
     factory_bot (6.4.2)
       activesupport (>= 5.0.0)
