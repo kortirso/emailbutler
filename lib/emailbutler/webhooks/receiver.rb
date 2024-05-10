@@ -24,8 +24,8 @@ module Emailbutler
 
       def receivers_mapper(user_agent)
         case user_agent
-        when SENDGRID_USER_AGENT then Emailbutler::Container.resolve('sendgrid_mapper')
-        when SMTP2GO_USER_AGENT then Emailbutler::Container.resolve('smtp2go_mapper')
+        when SENDGRID_USER_AGENT then Emailbutler::Container.resolve(:sendgrid_mapper)
+        when SMTP2GO_USER_AGENT then Emailbutler::Container.resolve(:smtp2go_mapper)
         end
       end
     end

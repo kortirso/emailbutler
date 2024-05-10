@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-require 'dry/auto_inject'
 require 'dry/container'
-require 'emailbutler/webhooks/receiver'
 require 'emailbutler/webhooks/mappers/sendgrid'
 require 'emailbutler/webhooks/mappers/smtp2go'
+require 'emailbutler/webhooks/receiver'
 
 module Emailbutler
   class Container
@@ -18,12 +17,11 @@ module Emailbutler
       end
     end
 
-    register('webhooks_receiver') { Emailbutler::Webhooks::Receiver.new }
-
     # webhook mappers
-    register('sendgrid_mapper') { Emailbutler::Webhooks::Mappers::Sendgrid.new }
-    register('smtp2go_mapper') { Emailbutler::Webhooks::Mappers::Smtp2Go.new }
+    register(:sendgrid_mapper) { Emailbutler::Webhooks::Mappers::Sendgrid.new }
+    register(:smtp2go_mapper) { Emailbutler::Webhooks::Mappers::Smtp2Go.new }
+
+    # webhook receiver
+    register(:webhooks_receiver) { Emailbutler::Webhooks::Receiver.new }
   end
 end
-
-Deps = Dry::AutoInject(Emailbutler::Container)
