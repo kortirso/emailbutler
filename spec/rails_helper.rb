@@ -14,7 +14,7 @@ FactoryBot.find_definitions
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
-ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
+ActiveRecord::Migration.check_all_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
