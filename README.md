@@ -1,6 +1,6 @@
 # Emailbutler
 Simple email tracker for Ruby on Rails applications.
-Emailbutler allows you to track delivery status of emails sent by your app through Sendgrid and/or SMTP2GO.
+Emailbutler allows you to track delivery status of emails sent by your app throught Sendgrid and/or SMTP2GO.
 
 There are situations when you need to check whether a certain letter or certain type of letters was successfully sent from the application, and through the UI of some providers you can try to find such a letter by the recipient or the subject of the letter, but sometimes it's not enough.
 
@@ -27,16 +27,17 @@ $ rails db:migrate
 
 Add configuration line to config/initializers/emailbutler.rb:
 
-#### ActiveRecord
+#### For ActiveRecord
 
 ```ruby
 require 'emailbutler/adapters/active_record'
 
 Emailbutler.configure do |config|
-  config.adapter = Emailbutler::Adapters::ActiveRecord.new
-  config.ui_username = 'username'
-  config.ui_password = 'password'
-  config.ui_secured_environments = ['production']
+  config.adapter = Emailbutler::Adapters::ActiveRecord.new # required
+  config.providers = %w[sendgrid smtp2go] # required at least 1 provider since 0.8
+  config.ui_username = 'username' # optional
+  config.ui_password = 'password' # optional
+  config.ui_secured_environments = ['production'] # optional
 end
 ```
 
@@ -59,9 +60,9 @@ class SendgridController < ApplicationController
   def create
     ... you can add some logic here
 
-    ::Emailbutler::Webhooks::Receiver.call(
-      user_agent: request.headers['HTTP_USER_AGENT'],
-      payload: receiver_params.to_h
+    Emailbutler::Container.resolve(:webhooks_receiver).call(
+      mapper: Emailbutler::Container.resolve(:sendgrid_mapper),
+      payload: receiver_params
     )
 
     head :ok
@@ -70,10 +71,7 @@ class SendgridController < ApplicationController
   private
 
   def receiver_params
-    params.permit(
-      'event', 'sendtime', 'message-id',
-      '_json' => %w[event timestamp smtp-id sg_message_id]
-    )
+    params.permit('event', 'sendtime', 'message-id').to_h
   end
 end
 ```
@@ -106,7 +104,7 @@ end
 
 - go to [Mail settings](https://app.sendgrid.com/settings/mail_settings),
 - turn on Event Webhook,
-- in the HTTP POST URL field, paste the URL to webhook controller of your app,
+- in the HTTP POST URL field, paste the URL to webhook controller of your app (host/emailbutler/webhooks/sendgrid),
 - select all deliverability data,
 - save settings.
 
@@ -114,7 +112,7 @@ end
 
 - go to [Mail settings](https://app-eu.smtp2go.com/settings/webhooks),
 - turn on Webhooks,
-- in the HTTP POST URL field, paste the URL to webhook controller of your app,
+- in the HTTP POST URL field, paste the URL to webhook controller of your app (host/emailbutler/webhooks/smtp2go),
 - select all deliverability data,
 - save settings.
 
