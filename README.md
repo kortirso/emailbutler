@@ -1,6 +1,6 @@
 # Emailbutler
 Simple email tracker for Ruby on Rails applications.
-Emailbutler allows you to track delivery status of emails sent by your app throught Sendgrid and/or SMTP2GO.
+Emailbutler allows you to track delivery status of emails sent by your app through Sendgrid and/or SMTP2GO.
 
 There are situations when you need to check whether a certain letter or certain type of letters was successfully sent from the application, and through the UI of some providers you can try to find such a letter by the recipient or the subject of the letter, but sometimes it's not enough.
 
