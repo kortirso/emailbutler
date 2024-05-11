@@ -16,12 +16,17 @@ module Emailbutler
 
   # Public: Configure emailbutler.
   #
+  #   require 'emailbutler/adapters/active_record'
+  #
   #   Emailbutler.configure do |config|
   #     config.adapter = Emailbutler::Adapters::ActiveRecord.new
+  #     config.providers = %i[sendgrid]
   #   end
   #
   def configure
     yield configuration
+
+    configuration.validate
   end
 
   # Public: Returns Emailbutler::Configuration instance.

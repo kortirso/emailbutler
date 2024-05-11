@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## Unreleased
 ### Added
 - dry container for better dependency injections
+- validating configuration during initialization
 
 ## [0.7.6] - 2024-04-19
 ### Modified
