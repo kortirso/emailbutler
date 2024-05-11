@@ -24,6 +24,12 @@ module Emailbutler
   #   end
   #
   def configure
+    ActiveSupport::Deprecation.new.warn(
+      'Webhook endpoint should receive provider name in params. ' \
+      'Please update webhook url in settings of your SMTP provider.' \
+      'Webhook without provider in params will be removed soon.'
+    )
+
     yield configuration
 
     configuration.validate

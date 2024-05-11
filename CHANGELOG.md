@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - dry container for better dependency injections
 - validating configuration during initialization
 
+### Modified
+- webhooks endpoint with splitting params by provider
+
 ## [0.7.6] - 2024-04-19
 ### Modified
 - gem pagy styles

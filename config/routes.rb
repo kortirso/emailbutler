@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 Emailbutler::Engine.routes.draw do
-  post '/webhooks', to: 'webhooks#create'
+  post '/webhooks', to: 'webhooks#create_deprecated'
+  post '/webhooks/:provider', to: 'webhooks#create'
 
   resources :ui, only: %i[index show]
   namespace :ui do
