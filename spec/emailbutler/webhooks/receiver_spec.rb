@@ -83,4 +83,18 @@ describe Emailbutler::Webhooks::Receiver do
       expect(message.timestamp).to eq DateTime.parse('2023-02-22T23:41:12.126Z').utc
     end
   end
+
+  context 'for mailjet' do
+    let(:mapper) { Emailbutler::Container.resolve(:mailjet_mapper) }
+    let(:payload) {
+      { 'MessageID' => message.uuid, 'event' => 'open', 'time' => timestamp }
+    }
+
+    it 'updates message', :aggregate_failures do
+      receiver_call
+
+      expect(message.reload.status).to eq 'delivered'
+      expect(message.timestamp).to eq Time.at(timestamp).utc.to_datetime
+    end
+  end
 end

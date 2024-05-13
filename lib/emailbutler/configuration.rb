@@ -7,7 +7,7 @@ module Emailbutler
     AVAILABLE_ADAPTERS = %w[
       Emailbutler::Adapters::ActiveRecord
     ].freeze
-    AVAILABLE_PROVIDERS = %w[sendgrid smtp2go resend].freeze
+    AVAILABLE_PROVIDERS = %w[sendgrid smtp2go resend mailjet].freeze
 
     attr_accessor :adapter, :providers, :ui_username, :ui_password, :ui_secured_environments
 
