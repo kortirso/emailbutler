@@ -63,4 +63,24 @@ describe Emailbutler::Webhooks::Receiver do
       expect(message.timestamp).to eq Time.at(timestamp).utc.to_datetime
     end
   end
+
+  context 'for resend' do
+    let(:mapper) { Emailbutler::Container.resolve(:resend_mapper) }
+    let(:payload) {
+      {
+        'type' => 'email.delivered',
+        'created_at' => '2023-02-22T23:41:12.126Z',
+        'data' => {
+          'email_id' => message.uuid
+        }
+      }
+    }
+
+    it 'updates message', :aggregate_failures do
+      receiver_call
+
+      expect(message.reload.status).to eq 'delivered'
+      expect(message.timestamp).to eq DateTime.parse('2023-02-22T23:41:12.126Z').utc
+    end
+  end
 end
