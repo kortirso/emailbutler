@@ -151,5 +151,34 @@ describe Emailbutler::WebhooksController do
         expect(response).to be_successful
       end
     end
+
+    context 'for resend' do
+      let(:params) {
+        {
+          'provider' => 'resend',
+          'type' => 'email.sent',
+          'created_at' => '2023-02-22T23:41:12.126Z',
+          'data' => {
+            'email_id' => '56761188-7520-42d8-8898-ff6fc54ce618'
+          }
+        }
+      }
+
+      before do
+        allow(configuration).to receive(:providers).and_return(%w[resend])
+      end
+
+      it 'calls webhooks receiver', :aggregate_failures do
+        post :create, params: params
+
+        expect(webhooks_receiver).to(
+          have_received(:call).with(
+            mapper: Emailbutler::Container.resolve(:resend_mapper),
+            payload: params.except('provider')
+          )
+        )
+        expect(response).to be_successful
+      end
+    end
   end
 end
