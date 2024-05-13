@@ -16,7 +16,6 @@ module Emailbutler
 
         def call(payload:)
           payload.stringify_keys!
-          # message-id contains data like <uuid>
           message_uuid = payload.dig('data', 'email_id')
           status = DELIVERABILITY_MAPPER[payload['type']]
           return [] if message_uuid.nil? || status.nil?

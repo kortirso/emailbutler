@@ -180,5 +180,32 @@ describe Emailbutler::WebhooksController do
         expect(response).to be_successful
       end
     end
+
+    context 'for mailjet' do
+      let(:params) {
+        {
+          'provider' => 'mailjet',
+          'MessageID' => '14c5d75ce93.dfd.64b469@ismtpd-555',
+          'event' => 'sent',
+          'time' => '1433333949'
+        }
+      }
+
+      before do
+        allow(configuration).to receive(:providers).and_return(%w[mailjet])
+      end
+
+      it 'calls webhooks receiver', :aggregate_failures do
+        post :create, params: params
+
+        expect(webhooks_receiver).to(
+          have_received(:call).with(
+            mapper: Emailbutler::Container.resolve(:mailjet_mapper),
+            payload: params.except('provider')
+          )
+        )
+        expect(response).to be_successful
+      end
+    end
   end
 end
