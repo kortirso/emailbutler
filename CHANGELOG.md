@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - resend provider integration
 
+### Modified
+- make providers configuration optional
+
 ## [0.8.0] - 2024-05-11
 ### Added
 - dry container for better dependency injections
