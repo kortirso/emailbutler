@@ -39,7 +39,6 @@ module Emailbutler
 
     def validate_providers
       raise InitializeError, 'Providers list must be array' unless providers.is_a?(Array)
-      raise InitializeError, 'At least 1 provider must be present' if providers.blank?
 
       return unless providers.any? { |provider| AVAILABLE_PROVIDERS.exclude?(provider) }
 
