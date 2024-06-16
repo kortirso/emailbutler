@@ -13,12 +13,8 @@ describe TestMailer do
         )
     }
 
-    it 'creates Message object' do
+    it 'creates Message object and Message has parameters', :aggregate_failures do
       expect { mail.deliver_now }.to change(message_class, :count).by(1)
-    end
-
-    it 'Message has parameters', :aggregate_failures do
-      mail.deliver_now
 
       last_message = message_class.last
 
