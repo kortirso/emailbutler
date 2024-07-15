@@ -51,7 +51,7 @@ module Emailbutler
     end
 
     def mailjet_params
-      params.permit('event', 'time', 'MessageID', 'Message_GUID')
+      params.permit('event', 'time', 'Message_GUID')
     end
   end
 end

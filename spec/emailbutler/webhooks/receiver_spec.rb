@@ -87,7 +87,7 @@ describe Emailbutler::Webhooks::Receiver do
   context 'for mailjet' do
     let(:mapper) { Emailbutler::Container.resolve(:mailjet_mapper) }
     let(:payload) {
-      { 'MessageID' => message.uuid, 'event' => 'open', 'time' => timestamp }
+      { 'Message_GUID' => message.uuid, 'event' => 'open', 'time' => timestamp }
     }
 
     it 'updates message', :aggregate_failures do

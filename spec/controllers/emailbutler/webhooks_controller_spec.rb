@@ -127,7 +127,7 @@ describe Emailbutler::WebhooksController do
       let(:params) {
         {
           'provider' => 'mailjet',
-          'MessageID' => '14c5d75ce93.dfd.64b469@ismtpd-555',
+          'Message_GUID' => '14c5d75ce93.dfd.64b469@ismtpd-555',
           'event' => 'sent',
           'time' => '1433333949'
         }
