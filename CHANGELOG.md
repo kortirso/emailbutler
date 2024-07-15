@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.8.1] - 2024-06-04
 ### Added
 - resend provider integration
+- mailjet provider integration
 
 ### Modified
 - make providers configuration optional
