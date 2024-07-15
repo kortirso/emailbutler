@@ -2,21 +2,8 @@
 
 module Emailbutler
   class WebhooksController < Emailbutler::ApplicationController
-    # deprecated constants
-    SENDGRID_USER_AGENT = 'SendGrid Event API'
-    SMTP2GO_USER_AGENT = 'Go-http-client/1.1'
-
     skip_before_action :verify_authenticity_token
     before_action :validate_provider, only: %i[create]
-
-    def create_deprecated
-      Emailbutler::Container.resolve(:webhooks_receiver).call(
-        mapper: receiver_mapper_deprecated(request.headers['HTTP_USER_AGENT']),
-        payload: mapper_params_deprecated.to_h
-      )
-
-      head :ok
-    end
 
     def create
       Emailbutler::Container.resolve(:webhooks_receiver).call(
@@ -65,20 +52,6 @@ module Emailbutler
 
     def mailjet_params
       params.permit('event', 'time', 'MessageID', 'Message_GUID')
-    end
-
-    def receiver_mapper_deprecated(user_agent)
-      case user_agent
-      when SENDGRID_USER_AGENT then Emailbutler::Container.resolve(:sendgrid_mapper)
-      when SMTP2GO_USER_AGENT then Emailbutler::Container.resolve(:smtp2go_mapper)
-      end
-    end
-
-    def mapper_params_deprecated
-      params.permit(
-        'event', 'sendtime', 'message-id',
-        '_json' => %w[event timestamp smtp-id sg_message_id]
-      )
     end
   end
 end

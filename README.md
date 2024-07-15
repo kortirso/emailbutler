@@ -34,7 +34,7 @@ require 'emailbutler/adapters/active_record'
 
 Emailbutler.configure do |config|
   config.adapter = Emailbutler::Adapters::ActiveRecord.new # required
-  config.providers = %w[sendgrid smtp2go resend mailjet] # required at least 1 provider since 0.8
+  config.providers = %w[sendgrid smtp2go resend mailjet] # optional
   config.ui_username = 'username' # optional
   config.ui_password = 'password' # optional
   config.ui_secured_environments = ['production'] # optional
