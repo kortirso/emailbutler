@@ -1,3 +1,5 @@
+<img align="right" alt="emailbutler" src="https://raw.githubusercontent.com/kortirso/emailbutler/master/logo.svg?sanitize=true">
+
 # Emailbutler
 Simple email tracker for Ruby on Rails applications.
 Emailbutler allows you to track delivery status of emails sent by your app through Sendgrid, SMTP2GO, Resend, Mailjet.
@@ -139,3 +141,7 @@ Emailbutler provides UI with rendering email tracking statistics - /emailbutler/
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Sponsors
+
+[<img width="200" src="https://evrone.com/logo/evrone-sponsored-logo.png">](https://evrone.com/?utm_source=emailbutler)
