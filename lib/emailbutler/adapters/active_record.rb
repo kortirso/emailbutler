@@ -21,7 +21,7 @@ module Emailbutler
         FAILED = 'failed'
         DELIVERED = 'delivered'
 
-        enum status: { CREATED => 0, REJECTED => 1, PROCESSED => 2, FAILED => 3, DELIVERED => 4 }
+        enum :status, { CREATED => 0, REJECTED => 1, PROCESSED => 2, FAILED => 3, DELIVERED => 4 }
 
         after_initialize :generate_uuid
 
