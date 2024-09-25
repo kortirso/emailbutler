@@ -97,4 +97,23 @@ describe Emailbutler::Webhooks::Receiver do
       expect(message.timestamp).to eq Time.at(timestamp).utc.to_datetime
     end
   end
+
+  context 'for mailtrap' do
+    let(:mapper) { Emailbutler::Container.resolve(:mailtrap_mapper) }
+    let(:payload) {
+      {
+        'events' => [
+          { 'message_id' => message.uuid, 'event' => 'open', 'timestamp' => timestamp },
+          { 'message_id' => 'unexisting', 'event' => 'click', 'timestamp' => timestamp }
+        ]
+      }
+    }
+
+    it 'updates message', :aggregate_failures do
+      receiver_call
+
+      expect(message.reload.status).to eq 'delivered'
+      expect(message.timestamp).to eq Time.at(timestamp).utc.to_datetime
+    end
+  end
 end

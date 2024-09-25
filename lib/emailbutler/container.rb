@@ -5,6 +5,7 @@ require 'emailbutler/webhooks/mappers/sendgrid'
 require 'emailbutler/webhooks/mappers/smtp2go'
 require 'emailbutler/webhooks/mappers/resend'
 require 'emailbutler/webhooks/mappers/mailjet'
+require 'emailbutler/webhooks/mappers/mailtrap'
 require 'emailbutler/webhooks/receiver'
 
 module Emailbutler
@@ -24,6 +25,7 @@ module Emailbutler
     register(:smtp2go_mapper) { Emailbutler::Webhooks::Mappers::Smtp2Go.new }
     register(:resend_mapper) { Emailbutler::Webhooks::Mappers::Resend.new }
     register(:mailjet_mapper) { Emailbutler::Webhooks::Mappers::Mailjet.new }
+    register(:mailtrap_mapper) { Emailbutler::Webhooks::Mappers::Mailtrap.new }
 
     # webhook receiver
     register(:webhooks_receiver) { Emailbutler::Webhooks::Receiver.new }

@@ -26,6 +26,7 @@ module Emailbutler
       when 'smtp2go' then Emailbutler::Container.resolve(:smtp2go_mapper)
       when 'resend' then Emailbutler::Container.resolve(:resend_mapper)
       when 'mailjet' then Emailbutler::Container.resolve(:mailjet_mapper)
+      when 'mailtrap' then Emailbutler::Container.resolve(:mailtrap_mapper)
       end
     end
 
@@ -35,6 +36,7 @@ module Emailbutler
       when 'smtp2go' then smtp2go_params
       when 'resend' then resend_params
       when 'mailjet' then mailjet_params
+      when 'mailtrap' then mailtrap_params
       end
     end
 
@@ -52,6 +54,10 @@ module Emailbutler
 
     def mailjet_params
       params.permit('event', 'time', 'Message_GUID')
+    end
+
+    def mailtrap_params
+      params.permit('events' => %w[event timestamp message_id])
     end
   end
 end
