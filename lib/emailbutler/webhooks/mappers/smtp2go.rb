@@ -8,18 +8,15 @@ module Emailbutler
           'processed' => 'processed',
           'delivered' => 'delivered',
           'open' => 'delivered',
-          'click' => 'delivered',
-          'bounce' => 'failed',
-          'reject' => 'failed',
-          'spam' => 'failed'
+          'click' => 'delivered'
         }.freeze
 
         def call(payload:)
           payload.stringify_keys!
           # message-id contains data like <uuid>
           message_uuid = payload['message-id'][1..-2]
-          status = DELIVERABILITY_MAPPER[payload['event']]
-          return [] if message_uuid.nil? || status.nil?
+          status = DELIVERABILITY_MAPPER[payload['event']] || Emailbutler::Message::FAILED
+          return [] if message_uuid.nil?
 
           [
             {
