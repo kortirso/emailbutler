@@ -116,4 +116,23 @@ describe Emailbutler::Webhooks::Receiver do
       expect(message.timestamp).to eq Time.at(timestamp).utc.to_datetime
     end
   end
+
+  context 'for mandrill' do
+    let(:mapper) { Emailbutler::Container.resolve(:mandrill_mapper) }
+    let(:payload) {
+      {
+        'mandrill_events' => [
+          { '_id' => message.uuid, 'event' => 'send', 'ts' => timestamp },
+          { '_id' => 'unexisting', 'event' => 'click', 'ts' => timestamp }
+        ]
+      }
+    }
+
+    it 'updates message', :aggregate_failures do
+      receiver_call
+
+      expect(message.reload.status).to eq 'processed'
+      expect(message.timestamp).to eq Time.at(timestamp).utc.to_datetime
+    end
+  end
 end
