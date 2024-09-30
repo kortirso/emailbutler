@@ -27,6 +27,7 @@ module Emailbutler
       when 'resend' then Emailbutler::Container.resolve(:resend_mapper)
       when 'mailjet' then Emailbutler::Container.resolve(:mailjet_mapper)
       when 'mailtrap' then Emailbutler::Container.resolve(:mailtrap_mapper)
+      when 'mandrill' then Emailbutler::Container.resolve(:mandrill_mapper)
       end
     end
 
@@ -37,6 +38,7 @@ module Emailbutler
       when 'resend' then resend_params
       when 'mailjet' then mailjet_params
       when 'mailtrap' then mailtrap_params
+      when 'mandrill' then mandrill_params
       end
     end
 
@@ -58,6 +60,10 @@ module Emailbutler
 
     def mailtrap_params
       params.permit('events' => %w[event timestamp message_id])
+    end
+
+    def mandrill_params
+      params.permit('mandrill_events' => %w[event ts _id])
     end
   end
 end
