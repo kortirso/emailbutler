@@ -16,8 +16,8 @@ module Emailbutler
       @providers = []
 
       # It's required to specify these 3 variables to enable basic auth to UI
-      @ui_username = nil
-      @ui_password = nil
+      @ui_username = ''
+      @ui_password = ''
       # Secured environments variable must directly contains environment names
       @ui_secured_environments = []
     end
@@ -25,9 +25,9 @@ module Emailbutler
     def validate
       validate_adapter
       validate_providers
+      validate_secured_environments
       validate_username
       validate_password
-      validate_secured_environments
     end
 
     private
@@ -45,22 +45,22 @@ module Emailbutler
       raise InitializeError, 'Providers list contain invalid element'
     end
 
-    def validate_username
-      return if ui_username.blank?
-      return if ui_username.is_a?(String)
+    def validate_secured_environments
+      raise InitializeError, 'Environments list must be array' unless ui_secured_environments.is_a?(Array)
+    end
 
-      raise InitializeError, 'Username must be nil or filled string'
+    def validate_username
+      return if ui_secured_environments.blank? && ui_username.is_a?(String)
+      return if ui_secured_environments.any? && ui_username.is_a?(String) && ui_username.present?
+
+      raise InitializeError, 'Username must be string'
     end
 
     def validate_password
-      return if ui_password.blank?
-      return if ui_password.is_a?(String)
+      return if ui_secured_environments.blank? && ui_password.is_a?(String)
+      return if ui_secured_environments.any? && ui_password.is_a?(String) && ui_password.present?
 
-      raise InitializeError, 'Password must be nil or filled string'
-    end
-
-    def validate_secured_environments
-      raise InitializeError, 'Environments list must be array' unless ui_secured_environments.is_a?(Array)
+      raise InitializeError, 'Password must be string'
     end
   end
 end
