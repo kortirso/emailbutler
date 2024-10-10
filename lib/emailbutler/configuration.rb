@@ -9,7 +9,7 @@ module Emailbutler
     ].freeze
     AVAILABLE_PROVIDERS = %w[sendgrid smtp2go resend mailjet mailtrap mandrill].freeze
 
-    attr_accessor :adapter, :providers, :ui_username, :ui_password, :ui_secured_environments
+    attr_reader :adapter, :providers, :ui_username, :ui_password, :ui_secured_environments
 
     def initialize
       @adapter = nil
@@ -23,44 +23,38 @@ module Emailbutler
     end
 
     def validate
-      validate_adapter
-      validate_providers
-      validate_secured_environments
-      validate_username
-      validate_password
+      raise InitializeError, 'Invalid adapter' if adapter.nil?
     end
 
-    private
+    def adapter=(value)
+      raise InitializeError, 'Adapter must be present' if value.nil?
+      raise InitializeError, 'Invalid adapter' if AVAILABLE_ADAPTERS.exclude?(value.class.name)
 
-    def validate_adapter
-      raise InitializeError, 'Adapter must be present' if adapter.nil?
-      raise InitializeError, 'Invalid adapter' if AVAILABLE_ADAPTERS.exclude?(adapter.class.name)
+      @adapter = value
     end
 
-    def validate_providers
-      raise InitializeError, 'Providers list must be array' unless providers.is_a?(Array)
+    def providers=(value)
+      raise InitializeError, 'Providers list must be array' unless value.is_a?(Array)
 
-      return unless providers.any? { |provider| AVAILABLE_PROVIDERS.exclude?(provider) }
+      if value.any? { |provider| AVAILABLE_PROVIDERS.exclude?(provider) }
+        raise InitializeError, 'Providers list contain invalid element'
+      end
 
-      raise InitializeError, 'Providers list contain invalid element'
+      @providers = value
     end
 
-    def validate_secured_environments
-      raise InitializeError, 'Environments list must be array' unless ui_secured_environments.is_a?(Array)
+    def ui_secured_environments=(value)
+      raise InitializeError, 'Environments list must be array' unless value.is_a?(Array)
+
+      @ui_secured_environments = value
     end
 
-    def validate_username
-      return if ui_secured_environments.blank? && ui_username.is_a?(String)
-      return if ui_secured_environments.any? && ui_username.is_a?(String) && ui_username.present?
-
-      raise InitializeError, 'Username must be string'
+    def ui_username=(value)
+      @ui_username = value if value.is_a?(String)
     end
 
-    def validate_password
-      return if ui_secured_environments.blank? && ui_password.is_a?(String)
-      return if ui_secured_environments.any? && ui_password.is_a?(String) && ui_password.present?
-
-      raise InitializeError, 'Password must be string'
+    def ui_password=(value)
+      @ui_password = value if value.is_a?(String)
     end
   end
 end
