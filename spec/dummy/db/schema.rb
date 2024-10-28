@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_10_094545) do
+ActiveRecord::Schema[7.2].define(version: 2023_05_10_094545) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -28,5 +28,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_10_094545) do
     t.datetime "updated_at", null: false
     t.index ["uuid"], name: "index_emailbutler_messages_on_uuid", unique: true
   end
-
 end

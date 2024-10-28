@@ -1,0 +1,209 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  height: 100%;
+}
+
+body {
+  font-family: "Source Sans 3", "Helvetica", "Open Sans", sans-serif;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+body p {
+  margin: 0;
+}
+
+body .content {
+  flex: 1;
+  width: 100%;
+  max-width: 90rem;
+  margin: 0 auto;
+}
+
+h1 {
+  margin: 0;
+}
+
+header {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+header .header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: .5rem 0;
+}
+
+header .header-wrapper a {
+  text-decoration: none;
+  color: #000;
+}
+
+footer {
+  border-top: 1px solid #e5e7eb;
+}
+
+footer .footer-wrapper {
+  width: 100%;
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: .5rem 1rem;
+}
+
+#dashboard {
+  padding-top: 1rem;
+  display: flex;
+}
+
+#dashboard .summary {
+  list-style: none;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  padding: .75rem 1rem;
+  background: #e5e7eb;
+  border-radius: .125rem;
+  margin: 0;
+}
+
+#dashboard .summary li {
+  flex: 1;
+  text-align: center;
+}
+
+#dashboard .summary li a {
+  text-decoration: none;
+}
+
+#dashboard .summary .status-summary {
+  display: flex;
+  flex-direction: column;
+  color: #000;
+  padding: .5rem 0;
+}
+
+#dashboard .summary .status-summary:hover {
+  background: #d1d5db;
+}
+
+#dashboard .summary .status-summary span:nth-of-type(1) {
+  margin-bottom: .25rem;
+  font-weight: 600;
+}
+
+.search-form {
+  width: 20rem;
+  padding-right: 2rem;
+}
+
+.search-form .form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: .5rem;
+}
+
+.search-form .form-field label {
+  margin-bottom: .25rem;
+}
+
+.search-form .form-field input {
+  padding: .25rem;
+}
+
+.messages {
+  flex: 1;
+  height: 100%;
+}
+
+.messages .pagination {
+  margin-bottom: 1rem;
+}
+
+.messages .pagination .page {
+  padding: .25rem .5rem;
+  background: #bbf7d0;
+  color: #000;
+}
+
+.messages .pagination .page a {
+  color: #000;
+}
+
+.messages nav.pagy.nav {
+  margin-bottom: 1rem;
+}
+
+.messages nav.pagy.nav a {
+  padding: .25rem .5rem;
+  margin-right: .25rem;
+  background: #bbf7d0;
+  color: #000;
+  border-radius: .125rem;
+}
+
+.messages table {
+  width: 100%;
+}
+
+.messages table thead tr th {
+  text-align: left;
+  padding: .125rem .25rem;
+}
+
+.messages table tbody tr:nth-of-type(odd) {
+  background: #e5e7eb;
+}
+
+.messages table tbody tr:hover {
+  background: #d1d5db;
+}
+
+.messages table tbody tr td {
+  padding: .125rem .25rem;
+}
+
+.messages table tbody tr td.actions {
+  display: flex;
+}
+
+.messages table tbody tr td.actions button:nth-of-type(1) {
+  margin-right: .5rem;
+}
+
+.button {
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
+  padding: .25rem;
+  background: #bbf7d0;
+}
+
+.button:hover {
+  background: #86efac;
+}
+
+.button.warning {
+  background: #fecaca;
+}
+
+.button.warning:hover {
+  background: #fca5a5;
+}
+
+@media screen and (max-width: 48rem) {
+  header .header-wrapper {
+    flex-direction: column;
+  }
+}

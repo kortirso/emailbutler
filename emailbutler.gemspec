@@ -18,12 +18,11 @@ Gem::Specification.new do |spec|
   spec.metadata['source_code_uri'] = spec.homepage
   spec.metadata['changelog_uri'] = 'https://github.com/kortirso/emailbutler/blob/master/CHANGELOG.md'
 
-  spec.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
+  spec.files = Dir['{app,config,db,lib,public}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
   spec.add_dependency 'dry-container', '~> 0.11.0'
   spec.add_dependency 'pagy', '> 4.0'
   spec.add_dependency 'rails', '> 6.0.0'
-  spec.add_dependency 'sassc-rails'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'pg', '> 1.0'

@@ -4,9 +4,12 @@
     <title>Emailbutler</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'emailbutler', media: 'all' %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400..500&display=swap">
+    <link rel="stylesheet" type="text/css" href="/emailbutler/styles.css" >
   </head>
-  <body id="emailbutler-body">
+  <body>
     <%= render 'emailbutler/ui/shared/header' %>
     <div class="content">
       <%= yield %>
