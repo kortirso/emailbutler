@@ -78,19 +78,6 @@ class SendgridController < ApplicationController
 end
 ```
 
-### UI styles
-
-For adding styles for UI you need to add this line to assets/config/manifest.js
-```js
-//= link emailbutler.css
-```
-
-Or in some cases you can specify it in assets/javascript/application.js
-
-```js
-//= require emailbutler_manifest
-````
-
 ### Mailers
 
 Update you application mailer
