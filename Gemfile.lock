@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    emailbutler (0.8.8)
+    emailbutler (0.8.9)
       dry-container (~> 0.10.0)
       pagy (> 4.0)
       rails (> 5.0.0)
@@ -92,7 +92,7 @@ GEM
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
-    date (3.3.4)
+    date (3.4.1)
     diff-lcs (1.5.1)
     drb (2.2.1)
     dry-container (0.10.1)
@@ -125,21 +125,21 @@ GEM
     marcel (1.0.4)
     mini_mime (1.1.5)
     minitest (5.25.1)
-    net-imap (0.5.0)
+    net-imap (0.5.6)
       date
       net-protocol
     net-pop (0.1.2)
       net-protocol
     net-protocol (0.2.2)
       timeout
-    net-smtp (0.5.0)
+    net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.3)
     nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-darwin)
       racc (~> 1.4)
-    pagy (9.1.0)
+    pagy (9.3.3)
     parallel (1.26.3)
     parser (3.3.5.0)
       ast (~> 2.4.1)
@@ -249,7 +249,8 @@ GEM
     unicode-display_width (2.6.0)
     useragent (0.16.10)
     webrick (1.8.2)
-    websocket-driver (0.7.6)
+    websocket-driver (0.7.7)
+      base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     zeitwerk (2.7.1)
