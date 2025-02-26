@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    emailbutler (0.8.10)
+    emailbutler (0.8.11)
       dry-container (~> 0.10.0)
       pagy (> 4.0)
       rails (> 5.0.0)
