@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    emailbutler (0.8.11)
-      dry-container (~> 0.10.0)
+    emailbutler (0.8.12)
+      dry-container (> 0.10.0)
       pagy (> 4.0)
       rails (> 5.0.0)
 
@@ -95,7 +95,7 @@ GEM
     date (3.4.1)
     diff-lcs (1.5.1)
     drb (2.2.1)
-    dry-container (0.10.1)
+    dry-container (0.11.0)
       concurrent-ruby (~> 1.0)
     erubi (1.13.0)
     factory_bot (6.5.0)
