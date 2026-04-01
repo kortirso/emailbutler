@@ -14,6 +14,7 @@ module Emailbutler
           payload.stringify_keys!
           # message-id contains data like <uuid>
           message_uuid = payload['Message_GUID']
+          message_uuid = message_uuid[1..-2] if message_uuid.starts_with?('<') && message_uuid.ends_with?('>')
           status = DELIVERABILITY_MAPPER[payload['event']] || Emailbutler::Message::FAILED
           return [] if message_uuid.nil?
 

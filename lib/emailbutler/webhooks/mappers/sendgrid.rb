@@ -11,10 +11,11 @@ module Emailbutler
           'click' => 'delivered'
         }.freeze
 
-        def call(payload:)
+        def call(payload:) # rubocop: disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
           payload['_json'].filter_map { |message|
             message.stringify_keys!
             message_uuid = message['smtp-id'] || message['sg_message_id']
+            message_uuid = message_uuid[1..-2] if message_uuid.starts_with?('<') && message_uuid.ends_with?('>')
             status = DELIVERABILITY_MAPPER[message['event']] || Emailbutler::Message::FAILED
             next if message_uuid.nil? || status.nil?
 

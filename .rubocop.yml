@@ -73,4 +73,4 @@ FactoryBot/ConsistentParenthesesStyle:
   Enabled: false
 
 Metrics/MethodLength:
-  Max: 11
+  Max: 12

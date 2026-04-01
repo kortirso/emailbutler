@@ -14,6 +14,7 @@ module Emailbutler
           payload['mandrill_events'].filter_map { |message|
             message.stringify_keys!
             message_uuid = message['_id']
+            message_uuid = message_uuid[1..-2] if message_uuid.starts_with?('<') && message_uuid.ends_with?('>')
             status = DELIVERABILITY_MAPPER[message['event']] || Emailbutler::Message::FAILED
             next if message_uuid.nil?
 

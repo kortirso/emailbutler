@@ -50,6 +50,28 @@ describe Emailbutler::Webhooks::Receiver do
     end
   end
 
+  context 'for sendgrid with additional symbols' do
+    let(:mapper) { Emailbutler::Container.resolve(:sendgrid_mapper) }
+    let(:payload) {
+      {
+        '_json' => [
+          { 'smtp-id' => "<#{message.uuid}>", 'event' => 'open', 'timestamp' => timestamp },
+          { 'smtp-id' => 'unexisting', 'event' => 'processed', 'timestamp' => timestamp },
+          { sg_message_id: '6rUcWo6KQAKG7V3S0YbxOw', event: 'click', timestamp: 1_684_251_474 },
+          { sg_message_id: '6rUcWo6KQAKG7V3S0YbxOw', event: 'click' },
+          { sg_message_id: '6rUcWo6KQAKG7V3S0YbxOw', event: 'click', timestamp: '1684251474' }
+        ]
+      }
+    }
+
+    it 'updates message', :aggregate_failures do
+      receiver_call
+
+      expect(message.reload.status).to eq 'delivered'
+      expect(message.timestamp).to eq Time.at(timestamp).utc.to_datetime
+    end
+  end
+
   context 'for smtp2go' do
     let(:mapper) { Emailbutler::Container.resolve(:smtp2go_mapper) }
     let(:payload) {
