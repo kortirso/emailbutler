@@ -4,16 +4,15 @@ module Emailbutler
   class Configuration
     InitializeError = Class.new(StandardError)
 
-    AVAILABLE_ADAPTERS = %w[
-      Emailbutler::Adapters::ActiveRecord
-    ].freeze
+    AVAILABLE_ADAPTERS = %w[Emailbutler::Adapters::ActiveRecord].freeze
     AVAILABLE_PROVIDERS = %w[sendgrid smtp2go resend mailjet mailtrap mandrill].freeze
 
-    attr_reader :adapter, :providers, :ui_username, :ui_password, :ui_secured_environments
+    attr_reader :adapter, :providers, :mapping, :ui_username, :ui_password, :ui_secured_environments
 
     def initialize
       @adapter = nil
       @providers = []
+      @mapping = true
 
       # It's required to specify these 3 variables to enable basic auth to UI
       @ui_username = ''

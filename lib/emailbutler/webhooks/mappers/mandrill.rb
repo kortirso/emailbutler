@@ -6,8 +6,8 @@ module Emailbutler
       class Mandrill
         DELIVERABILITY_MAPPER = {
           'send' => 'processed',
-          'open' => 'delivered',
-          'click' => 'delivered'
+          'open' => 'opened',
+          'click' => 'opened'
         }.freeze
 
         def call(payload:)
@@ -15,15 +15,22 @@ module Emailbutler
             message.stringify_keys!
             message_uuid = message['_id']
             message_uuid = message_uuid[1..-2] if message_uuid.starts_with?('<') && message_uuid.ends_with?('>')
-            status = DELIVERABILITY_MAPPER[message['event']] || Emailbutler::Message::FAILED
             next if message_uuid.nil?
 
             {
               message_uuid: message_uuid,
-              status: status,
+              status: transform_status(message['event']),
               timestamp: message['ts'] ? Time.at(message['ts']).utc.to_datetime : nil
             }
           }
+        end
+
+        private
+
+        def transform_status(value)
+          return DELIVERABILITY_MAPPER[value] || Emailbutler::Message::FAILED if Emailbutler.configuration.mapping
+
+          value
         end
       end
     end

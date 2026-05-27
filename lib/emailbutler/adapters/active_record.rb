@@ -20,11 +20,12 @@ module Emailbutler
         PROCESSED = 'processed'
         FAILED = 'failed'
         DELIVERED = 'delivered'
+        OPENED = 'opened'
 
         if Gem.loaded_specs['activerecord'].version < Gem::Version.create('7.0')
-          enum status: { CREATED => 0, REJECTED => 1, PROCESSED => 2, FAILED => 3, DELIVERED => 4 }
+          enum status: { CREATED => 0, REJECTED => 1, PROCESSED => 2, FAILED => 3, DELIVERED => 4, OPENED => 5 }
         else
-          enum :status, { CREATED => 0, REJECTED => 1, PROCESSED => 2, FAILED => 3, DELIVERED => 4 }
+          enum :status, { CREATED => 0, REJECTED => 1, PROCESSED => 2, FAILED => 3, DELIVERED => 4, OPENED => 5 }
         end
 
         after_initialize :generate_uuid

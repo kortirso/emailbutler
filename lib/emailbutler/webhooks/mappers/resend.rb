@@ -7,24 +7,31 @@ module Emailbutler
         DELIVERABILITY_MAPPER = {
           'email.sent' => 'processed',
           'email.delivered' => 'delivered',
-          'email.opened' => 'delivered',
-          'email.clicked' => 'delivered'
+          'email.opened' => 'opened',
+          'email.clicked' => 'opened'
         }.freeze
 
         def call(payload:)
           payload.stringify_keys!
           message_uuid = payload.dig('data', 'email_id')
           message_uuid = message_uuid[1..-2] if message_uuid.starts_with?('<') && message_uuid.ends_with?('>')
-          status = DELIVERABILITY_MAPPER[payload['type']] || Emailbutler::Message::FAILED
           return [] if message_uuid.nil?
 
           [
             {
               message_uuid: message_uuid,
-              status: status,
+              status: transform_status(payload['type']),
               timestamp: payload['created_at'] ? DateTime.parse(payload['created_at']).utc : nil
             }
           ]
+        end
+
+        private
+
+        def transform_status(value)
+          return DELIVERABILITY_MAPPER[value] || Emailbutler::Message::FAILED if Emailbutler.configuration.mapping
+
+          value
         end
       end
     end
