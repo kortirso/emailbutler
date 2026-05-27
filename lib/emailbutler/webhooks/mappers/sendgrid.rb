@@ -16,7 +16,7 @@ module Emailbutler
             message.stringify_keys!
             message_uuid = message['smtp-id'] || message['sg_message_id']
             message_uuid = message_uuid[1..-2] if message_uuid.starts_with?('<') && message_uuid.ends_with?('>')
-            next if message_uuid.nil? || status.nil?
+            next if message_uuid.nil?
 
             {
               message_uuid: message_uuid,
